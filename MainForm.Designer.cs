@@ -31,6 +31,8 @@
             this.viewDataFormButton = new System.Windows.Forms.Button();
             this.addSubjectButton = new System.Windows.Forms.Button();
             this.viewStatisticsFormButton = new System.Windows.Forms.Button();
+            this.addAppointmentButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // viewDataFormButton
@@ -66,11 +68,34 @@
             this.viewStatisticsFormButton.UseVisualStyleBackColor = true;
             this.viewStatisticsFormButton.Click += new System.EventHandler(this.viewStatisticsFormButton_Click);
             // 
+            // addAppointmentButton
+            // 
+            this.addAppointmentButton.Location = new System.Drawing.Point(405, 269);
+            this.addAppointmentButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.addAppointmentButton.Name = "addAppointmentButton";
+            this.addAppointmentButton.Size = new System.Drawing.Size(276, 54);
+            this.addAppointmentButton.TabIndex = 4;
+            this.addAppointmentButton.Text = "Add Appointment";
+            this.addAppointmentButton.UseVisualStyleBackColor = true;
+            this.addAppointmentButton.Click += new System.EventHandler(this.addAppointmentButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(226, 489);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(348, 81);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 760);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.addAppointmentButton);
             this.Controls.Add(this.viewStatisticsFormButton);
             this.Controls.Add(this.addSubjectButton);
             this.Controls.Add(this.viewDataFormButton);
@@ -88,5 +113,7 @@
         private System.Windows.Forms.Button viewDataFormButton;
         private System.Windows.Forms.Button addSubjectButton;
         private System.Windows.Forms.Button viewStatisticsFormButton;
+        private System.Windows.Forms.Button addAppointmentButton;
+        private System.Windows.Forms.Button button1;
     }
 }

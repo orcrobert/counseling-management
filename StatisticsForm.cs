@@ -22,6 +22,7 @@ namespace subjectmanager
 
         private void StatisticsForm_Load(object sender, EventArgs e)
         {
+            
             GetStatistics();
         }
         

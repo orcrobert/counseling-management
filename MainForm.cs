@@ -39,5 +39,17 @@ namespace subjectmanager
             StatisticsForm form = new StatisticsForm();
             form.ShowDialog();
         }
+
+        private void addAppointmentButton_Click(object sender, EventArgs e)
+        {
+            AddAppointmentForm form = new AddAppointmentForm();
+            form.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Test form = new Test();
+            form.ShowDialog();
+        }
     }
 }

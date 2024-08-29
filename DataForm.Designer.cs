@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataForm));
             this.matricoleBindingSource1BindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.matricoleBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.subjectsDataSet1 = new subjectmanager.SubjectsDataSet();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -49,15 +51,13 @@
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.matricoleBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.subjectsDataSet1 = new subjectmanager.SubjectsDataSet();
             this.matricoleTableAdapter1 = new subjectmanager.SubjectsDataSetTableAdapters.matricoleTableAdapter();
             this.tableAdapterManager2 = new subjectmanager.SubjectsDataSetTableAdapters.TableAdapterManager();
             ((System.ComponentModel.ISupportInitialize)(this.matricoleBindingSource1BindingNavigator)).BeginInit();
             this.matricoleBindingSource1BindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.matricoleDataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.matricoleBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matricoleDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // matricoleBindingSource1BindingNavigator
@@ -98,6 +98,16 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
+            // 
+            // matricoleBindingSource1
+            // 
+            this.matricoleBindingSource1.DataMember = "matricole";
+            this.matricoleBindingSource1.DataSource = this.subjectsDataSet1;
+            // 
+            // subjectsDataSet1
+            // 
+            this.subjectsDataSet1.DataSetName = "SubjectsDataSet";
+            this.subjectsDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bindingNavigatorCountItem
             // 
@@ -200,6 +210,7 @@
             this.matricoleDataGridView1.Name = "matricoleDataGridView1";
             this.matricoleDataGridView1.Size = new System.Drawing.Size(671, 334);
             this.matricoleDataGridView1.TabIndex = 1;
+            this.matricoleDataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.matricoleDataGridView1_CellContentClick);
             // 
             // dataGridViewTextBoxColumn6
             // 
@@ -232,16 +243,6 @@
             this.dataGridViewTextBoxColumn10.HeaderText = "noOfAppointments";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             // 
-            // matricoleBindingSource1
-            // 
-            this.matricoleBindingSource1.DataMember = "matricole";
-            this.matricoleBindingSource1.DataSource = this.subjectsDataSet1;
-            // 
-            // subjectsDataSet1
-            // 
-            this.subjectsDataSet1.DataSetName = "SubjectsDataSet";
-            this.subjectsDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // matricoleTableAdapter1
             // 
             this.matricoleTableAdapter1.ClearBeforeFill = true;
@@ -258,13 +259,13 @@
             this.Controls.Add(this.matricoleDataGridView1);
             this.Controls.Add(this.matricoleBindingSource1BindingNavigator);
             this.Name = "DataForm";
-            this.Load += new System.EventHandler(this.Form1_Load_1);
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.matricoleBindingSource1BindingNavigator)).EndInit();
             this.matricoleBindingSource1BindingNavigator.ResumeLayout(false);
             this.matricoleBindingSource1BindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.matricoleDataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.matricoleBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.matricoleDataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

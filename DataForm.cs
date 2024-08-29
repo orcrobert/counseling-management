@@ -32,14 +32,7 @@ namespace subjectmanager
 
         public void RefreshData()
         {
-            this.matricoleTableAdapter.Fill(this.subjectsDataSet.matricole);
-        }
-
-        private void Form1_Load_1(object sender, EventArgs e)
-        {
-            // TODO: This line of code loads data into the 'subjectsDataSet1.matricole' table. You can move, or remove it, as needed.
             this.matricoleTableAdapter1.Fill(this.subjectsDataSet1.matricole);
-
         }
 
         private void matricoleBindingSource1BindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -47,6 +40,11 @@ namespace subjectmanager
             this.Validate();
             this.matricoleBindingSource1.EndEdit();
             this.tableAdapterManager2.UpdateAll(this.subjectsDataSet1);
+
+        }
+
+        private void matricoleDataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
