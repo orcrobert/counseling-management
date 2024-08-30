@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient; // Add this if not already present
+using System.Data.SqlClient;
 
 namespace subjectmanager
 {

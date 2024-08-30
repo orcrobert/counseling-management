@@ -34,6 +34,8 @@
             this.completedAppointmentsLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.numberOfCounseledLabel = new System.Windows.Forms.Label();
+            this.numberOfGroupAppointments = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -90,11 +92,31 @@
             this.numberOfCounseledLabel.Size = new System.Drawing.Size(0, 20);
             this.numberOfCounseledLabel.TabIndex = 5;
             // 
+            // numberOfGroupAppointments
+            // 
+            this.numberOfGroupAppointments.AutoSize = true;
+            this.numberOfGroupAppointments.Location = new System.Drawing.Point(457, 293);
+            this.numberOfGroupAppointments.Name = "numberOfGroupAppointments";
+            this.numberOfGroupAppointments.Size = new System.Drawing.Size(0, 20);
+            this.numberOfGroupAppointments.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(158, 293);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(152, 20);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Group Appointments";
+            // 
             // StatisticsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1350, 868);
+            this.ClientSize = new System.Drawing.Size(835, 461);
+            this.Controls.Add(this.numberOfGroupAppointments);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.numberOfCounseledLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.completedAppointmentsLabel);
@@ -119,5 +141,7 @@
         private System.Windows.Forms.Label completedAppointmentsLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label numberOfCounseledLabel;
+        private System.Windows.Forms.Label numberOfGroupAppointments;
+        private System.Windows.Forms.Label label5;
     }
 }

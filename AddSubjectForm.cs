@@ -31,14 +31,17 @@ namespace subjectmanager
             int noOfAppointments;
             if (noOfAppointmentsTextBox.Text.Length == 0)
                 noOfAppointments = 0;
-            try
+            else
             {
-                noOfAppointments = int.Parse(noOfAppointmentsTextBox.Text);
-            }
-            catch (FormatException ex)
-            {
-                MessageBox.Show("Number of appointments must be a integer!");
-                return;
+                try
+                {
+                    noOfAppointments = int.Parse(noOfAppointmentsTextBox.Text);
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Number of appointments must be a integer!");
+                    return;
+                }
             }
 
             if (nameTextBox.Text == "" || classTextBox.Text == "")

@@ -32,22 +32,26 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // subjectsComboBox
             // 
             this.subjectsComboBox.FormattingEnabled = true;
-            this.subjectsComboBox.Location = new System.Drawing.Point(12, 45);
+            this.subjectsComboBox.Location = new System.Drawing.Point(12, 36);
             this.subjectsComboBox.Name = "subjectsComboBox";
             this.subjectsComboBox.Size = new System.Drawing.Size(251, 21);
             this.subjectsComboBox.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(51, 81);
+            this.button1.Location = new System.Drawing.Point(51, 101);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(156, 28);
             this.button1.TabIndex = 1;
@@ -74,22 +78,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Add group of students appointment";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(414, 42);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Number of students";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(537, 39);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 5;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(478, 81);
@@ -98,12 +86,69 @@
             this.button2.TabIndex = 6;
             this.button2.Text = "Add Appointment";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 78);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(122, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Number of appointments";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(136, 75);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 5;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(537, 41);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(409, 44);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(122, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Number of appointments";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.label5.Location = new System.Drawing.Point(242, 79);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 12);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "leave empty for 1";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.label6.Location = new System.Drawing.Point(643, 49);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 12);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "leave empty for 1";
             // 
             // AddAppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 450);
+            this.ClientSize = new System.Drawing.Size(731, 450);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
@@ -125,8 +170,12 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

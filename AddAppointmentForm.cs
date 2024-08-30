@@ -61,7 +61,25 @@ namespace subjectmanager
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE matricole SET noOfAppointments = noOfAppointments + 1 WHERE Id = @SubjectId", conn);
+
+                int appointmentCount;
+                if (textBox1.Text.Length == 0)
+                    appointmentCount = 1;
+                else
+                {
+                    try
+                    {
+                        appointmentCount = int.Parse(textBox1.Text);
+                    }
+                    catch (FormatException ex)
+                    {
+                        MessageBox.Show("Number of appointments must be a integer!");
+                        return;
+                    }
+                }
+
+                SqlCommand cmd = new SqlCommand("UPDATE matricole SET noOfAppointments = noOfAppointments + @appointmentCount WHERE Id = @SubjectId", conn);
+                cmd.Parameters.AddWithValue("@appointmentCount", appointmentCount);
                 cmd.Parameters.AddWithValue("@SubjectId", subjectId);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -74,6 +92,44 @@ namespace subjectmanager
             catch (Exception ex)
             {
                 MessageBox.Show("Error updating number of appointments!");
+            }
+            finally { conn.Close(); }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                conn.Open();
+
+                int appointmentCount;
+                if (textBox2.Text.Length == 0)
+                    appointmentCount = 1;
+                else
+                {
+                    try
+                    {
+                        appointmentCount = int.Parse(textBox2.Text);
+                    }
+                    catch (FormatException ex)
+                    {
+                        MessageBox.Show("Number of appointments must be a integer!");
+                        return;
+                    }
+                }
+
+                SqlCommand cmd = new SqlCommand("UPDATE groupAppointments SET noOfAppointments = noOfAppointments + @appointmentCount", conn);
+                cmd.Parameters.AddWithValue("@appointmentCount", appointmentCount);
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                    MessageBox.Show("Appointment added successfully!");
+                else
+                    MessageBox.Show("Failed to add appointment!");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error updating number of group appointments!");
             }
             finally { conn.Close(); }
         }

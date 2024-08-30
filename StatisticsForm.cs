@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 namespace subjectmanager
 {
     public partial class StatisticsForm : Form
+
     {
         SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Robert\\source\\repos\\subjectmanager\\Subjects.mdf;Integrated Security=True");
 
@@ -47,6 +48,13 @@ namespace subjectmanager
             numberOfCounseledLabel.Text = counseledCount.ToString();
         }
 
+        private void getGroupAppointments()
+        {
+            SqlCommand cmd = new SqlCommand("SElECT SUM(noOfAppointments) FROM groupAppointments", conn);
+            int appointmentCount = (int)cmd.ExecuteScalar();
+            numberOfGroupAppointments.Text = appointmentCount.ToString();
+        }
+
         private void GetStatistics()
         {
             try
@@ -55,6 +63,7 @@ namespace subjectmanager
                 countSubjects();
                 countAppointments();
                 countCounseled();
+                getGroupAppointments();
             }
             catch (Exception ex)
             {
