@@ -177,5 +177,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+
+
+
+        private System.Windows.Forms.DateTimePicker appointmentDatePicker;
+        private System.Windows.Forms.TextBox studentNameTextBox;
+        private System.Windows.Forms.Label labelDate;
+        private System.Windows.Forms.Label labelStudent;
+        private System.Windows.Forms.Button scheduleButton;
     }
 }

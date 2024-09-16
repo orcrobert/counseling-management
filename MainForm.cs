@@ -48,7 +48,13 @@ namespace subjectmanager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Test form = new Test();
+            DataForm form = new DataForm();
+            form.ShowDialog();
+        }
+
+        private void deleteSubjectButton_Click(object sender, EventArgs e)
+        {
+            DeleteSubjectForm form = new DeleteSubjectForm();
             form.ShowDialog();
         }
     }

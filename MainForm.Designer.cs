@@ -32,7 +32,7 @@
             this.addSubjectButton = new System.Windows.Forms.Button();
             this.viewStatisticsFormButton = new System.Windows.Forms.Button();
             this.addAppointmentButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.deleteSubjectButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // viewDataFormButton
@@ -59,7 +59,7 @@
             // 
             // viewStatisticsFormButton
             // 
-            this.viewStatisticsFormButton.Location = new System.Drawing.Point(405, 195);
+            this.viewStatisticsFormButton.Location = new System.Drawing.Point(405, 433);
             this.viewStatisticsFormButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.viewStatisticsFormButton.Name = "viewStatisticsFormButton";
             this.viewStatisticsFormButton.Size = new System.Drawing.Size(276, 54);
@@ -70,7 +70,7 @@
             // 
             // addAppointmentButton
             // 
-            this.addAppointmentButton.Location = new System.Drawing.Point(405, 269);
+            this.addAppointmentButton.Location = new System.Drawing.Point(405, 351);
             this.addAppointmentButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addAppointmentButton.Name = "addAppointmentButton";
             this.addAppointmentButton.Size = new System.Drawing.Size(276, 54);
@@ -79,22 +79,23 @@
             this.addAppointmentButton.UseVisualStyleBackColor = true;
             this.addAppointmentButton.Click += new System.EventHandler(this.addAppointmentButton_Click);
             // 
-            // button1
+            // deleteSubjectButton
             // 
-            this.button1.Location = new System.Drawing.Point(226, 489);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(348, 81);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.deleteSubjectButton.Location = new System.Drawing.Point(405, 193);
+            this.deleteSubjectButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.deleteSubjectButton.Name = "deleteSubjectButton";
+            this.deleteSubjectButton.Size = new System.Drawing.Size(276, 54);
+            this.deleteSubjectButton.TabIndex = 5;
+            this.deleteSubjectButton.Text = "Delete Subject";
+            this.deleteSubjectButton.UseVisualStyleBackColor = true;
+            this.deleteSubjectButton.Click += new System.EventHandler(this.deleteSubjectButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 760);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.deleteSubjectButton);
             this.Controls.Add(this.addAppointmentButton);
             this.Controls.Add(this.viewStatisticsFormButton);
             this.Controls.Add(this.addSubjectButton);
@@ -114,6 +115,6 @@
         private System.Windows.Forms.Button addSubjectButton;
         private System.Windows.Forms.Button viewStatisticsFormButton;
         private System.Windows.Forms.Button addAppointmentButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button deleteSubjectButton;
     }
 }
