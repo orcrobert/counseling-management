@@ -28,13 +28,14 @@ namespace subjectmanager
         public AddAppointmentForm()
         {
             InitializeComponent();
-            appointmentDatePicker = new System.Windows.Forms.DateTimePicker();
+            appointmentDatePicker = new DateTimePicker();
+            appointmentDatePicker.Format = DateTimePickerFormat.Custom;
+            appointmentDatePicker.CustomFormat = "MM/dd/yyyy hh:mm tt";
             studentNameTextBox = new System.Windows.Forms.TextBox();
             labelDate = new System.Windows.Forms.Label();
             labelStudent = new System.Windows.Forms.Label();
-            scheduleButton = new System.Windows.Forms.Button(); // Add button for scheduling
+            scheduleButton = new System.Windows.Forms.Button();
 
-            // Setting properties
             labelDate.Text = "Appointment Date & Time:";
             labelDate.Location = new System.Drawing.Point(20, 180);
             appointmentDatePicker.Location = new System.Drawing.Point(200, 180);
@@ -155,7 +156,7 @@ namespace subjectmanager
                 else
                     MessageBox.Show("Failed to add appointment!");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error updating number of group appointments!");
             }

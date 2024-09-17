@@ -48,7 +48,7 @@ namespace subjectmanager
 
         private void deleteStudentButton_Click(object sender, EventArgs e)
         {
-            int studentId = (int)subjectComboBox.SelectedIndex + 1;
+            int studentId = Convert.ToInt32(subjectComboBox.SelectedValue);
 
             try
             {

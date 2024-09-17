@@ -59,7 +59,7 @@
             // 
             // viewStatisticsFormButton
             // 
-            this.viewStatisticsFormButton.Location = new System.Drawing.Point(405, 433);
+            this.viewStatisticsFormButton.Location = new System.Drawing.Point(405, 277);
             this.viewStatisticsFormButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.viewStatisticsFormButton.Name = "viewStatisticsFormButton";
             this.viewStatisticsFormButton.Size = new System.Drawing.Size(276, 54);
@@ -70,7 +70,7 @@
             // 
             // addAppointmentButton
             // 
-            this.addAppointmentButton.Location = new System.Drawing.Point(405, 351);
+            this.addAppointmentButton.Location = new System.Drawing.Point(405, 353);
             this.addAppointmentButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addAppointmentButton.Name = "addAppointmentButton";
             this.addAppointmentButton.Size = new System.Drawing.Size(276, 54);
@@ -81,7 +81,7 @@
             // 
             // deleteSubjectButton
             // 
-            this.deleteSubjectButton.Location = new System.Drawing.Point(405, 193);
+            this.deleteSubjectButton.Location = new System.Drawing.Point(405, 198);
             this.deleteSubjectButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.deleteSubjectButton.Name = "deleteSubjectButton";
             this.deleteSubjectButton.Size = new System.Drawing.Size(276, 54);
