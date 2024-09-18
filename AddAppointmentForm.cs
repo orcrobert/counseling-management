@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -22,7 +23,7 @@ namespace subjectmanager
 {
     public partial class AddAppointmentForm : Form
     {
-        private SqlConnection conn = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Robert\\source\\repos\\subjectmanager\\Subjects.mdf;Integrated Security=True");
+        private SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["subjectmanager.Properties.Settings.SubjectsConnectionString"].ConnectionString);
         private static string[] Scopes = { CalendarService.Scope.Calendar };
         private static string ApplicationName = "subjectmanager";
         public AddAppointmentForm()
@@ -71,7 +72,7 @@ namespace subjectmanager
 
                 subjectsComboBox.DataSource = subjectsTable;
                 subjectsComboBox.DisplayMember = "name";
-                subjectsComboBox.ValueMember = "Id";
+                subjectsComboBox.ValueMember = "name";
             }
             catch (Exception ex)
             {
@@ -85,15 +86,19 @@ namespace subjectmanager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int subjectId = (int)subjectsComboBox.SelectedIndex + 1;
+            DataRowView selectedRow = (DataRowView)subjectsComboBox.SelectedItem;
 
+            // Assuming the "name" is the column containing the subject name
+            string subjectName = selectedRow["name"].ToString(); 
+            MessageBox.Show("Selected Subject: " + subjectName);
             try
             {
                 conn.Open();
 
+                // Handling the number of appointments
                 int appointmentCount;
                 if (textBox1.Text.Length == 0)
-                    appointmentCount = 1;
+                    appointmentCount = 1; // Default to 1 if no value is provided
                 else
                 {
                     try
@@ -102,27 +107,50 @@ namespace subjectmanager
                     }
                     catch (FormatException ex)
                     {
-                        MessageBox.Show("Number of appointments must be a integer!");
+                        MessageBox.Show("Number of appointments must be an integer!");
                         return;
                     }
                 }
 
-                SqlCommand cmd = new SqlCommand("UPDATE matricole SET noOfAppointments = noOfAppointments + @appointmentCount WHERE Id = @SubjectId", conn);
+                // Update the number of appointments in the matricole table
+                SqlCommand cmd = new SqlCommand("UPDATE matricole SET noOfAppointments = noOfAppointments + @appointmentCount WHERE name = @SubjectName", conn);
                 cmd.Parameters.AddWithValue("@appointmentCount", appointmentCount);
-                cmd.Parameters.AddWithValue("@SubjectId", subjectId);
+                cmd.Parameters.AddWithValue("@SubjectName", subjectName);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
+                // If update was successful, insert into appointmentsDate
                 if (rowsAffected > 0)
+                {
+                    // Assuming you have a DateTimePicker for selecting the date
+                    DateTime selectedDate = appointmentDatePicker.Value; // Replace with your actual DateTimePicker control
+
+                    // Assuming you have a TextBox for the theme of the appointment
+                    string theme = themeTextBox.Text; // Replace themeTextBox with the actual TextBox control for the theme
+
+                    // Insert the appointment details into the appointmentsDate table
+                    cmd = new SqlCommand("INSERT INTO appointmentsDate (name, date, theme) VALUES (@name, @date, @theme)", conn);
+                    cmd.Parameters.AddWithValue("@name", subjectName);  // Insert the selected subject name
+                    cmd.Parameters.AddWithValue("@date", selectedDate); // Insert the selected date
+                    cmd.Parameters.AddWithValue("@theme", theme);       // Insert the entered theme
+
+                    cmd.ExecuteNonQuery();
+
                     MessageBox.Show("Appointment added successfully!");
+                }
                 else
-                    MessageBox.Show("Failed to add appointment!");
+                {
+                    MessageBox.Show("Failed to update the number of appointments!");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error updating number of appointments!");
+                MessageBox.Show("Error: " + ex.Message);
             }
-            finally { conn.Close(); }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -171,7 +199,7 @@ namespace subjectmanager
         public CalendarService AuthenticateGoogleCalendar()
         {
             UserCredential credential;
-            using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "credentials.json"), FileMode.Open, FileAccess.Read))
             {
                 string credPath = "token.json";
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(

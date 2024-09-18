@@ -3,6 +3,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Configuration;
+
+
 
 namespace subjectmanager
 {
@@ -23,7 +26,7 @@ namespace subjectmanager
 
         private void InitializeDatabaseConnection()
         {
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Robert\\source\\repos\\subjectmanager\\Subjects.mdf;Integrated Security=True";
+            var connectionString = ConfigurationManager.ConnectionStrings["subjectmanager.Properties.Settings.SubjectsConnectionString"].ConnectionString;
             conn = new SqlConnection(connectionString);
         }
 

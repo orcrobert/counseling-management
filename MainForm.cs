@@ -51,5 +51,11 @@ namespace subjectmanager
             DeleteSubjectForm form = new DeleteSubjectForm();
             form.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Test form = new Test();
+            form.ShowDialog();
+        }
     }
 }

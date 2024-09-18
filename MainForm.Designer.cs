@@ -33,11 +33,14 @@
             this.viewStatisticsFormButton = new System.Windows.Forms.Button();
             this.addAppointmentButton = new System.Windows.Forms.Button();
             this.deleteSubjectButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // viewDataFormButton
             // 
-            this.viewDataFormButton.Location = new System.Drawing.Point(405, 34);
+            this.viewDataFormButton.Location = new System.Drawing.Point(50, 82);
             this.viewDataFormButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.viewDataFormButton.Name = "viewDataFormButton";
             this.viewDataFormButton.Size = new System.Drawing.Size(276, 54);
@@ -48,7 +51,7 @@
             // 
             // addSubjectButton
             // 
-            this.addSubjectButton.Location = new System.Drawing.Point(405, 115);
+            this.addSubjectButton.Location = new System.Drawing.Point(414, 82);
             this.addSubjectButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addSubjectButton.Name = "addSubjectButton";
             this.addSubjectButton.Size = new System.Drawing.Size(276, 54);
@@ -59,7 +62,7 @@
             // 
             // viewStatisticsFormButton
             // 
-            this.viewStatisticsFormButton.Location = new System.Drawing.Point(405, 277);
+            this.viewStatisticsFormButton.Location = new System.Drawing.Point(50, 155);
             this.viewStatisticsFormButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.viewStatisticsFormButton.Name = "viewStatisticsFormButton";
             this.viewStatisticsFormButton.Size = new System.Drawing.Size(276, 54);
@@ -70,7 +73,7 @@
             // 
             // addAppointmentButton
             // 
-            this.addAppointmentButton.Location = new System.Drawing.Point(405, 353);
+            this.addAppointmentButton.Location = new System.Drawing.Point(50, 417);
             this.addAppointmentButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addAppointmentButton.Name = "addAppointmentButton";
             this.addAppointmentButton.Size = new System.Drawing.Size(276, 54);
@@ -81,7 +84,7 @@
             // 
             // deleteSubjectButton
             // 
-            this.deleteSubjectButton.Location = new System.Drawing.Point(405, 198);
+            this.deleteSubjectButton.Location = new System.Drawing.Point(414, 155);
             this.deleteSubjectButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.deleteSubjectButton.Name = "deleteSubjectButton";
             this.deleteSubjectButton.Size = new System.Drawing.Size(276, 54);
@@ -90,11 +93,42 @@
             this.deleteSubjectButton.UseVisualStyleBackColor = true;
             this.deleteSubjectButton.Click += new System.EventHandler(this.deleteSubjectButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(46, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "View";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(410, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(102, 20);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Edit Database";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(665, 428);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(318, 156);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 760);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteSubjectButton);
             this.Controls.Add(this.addAppointmentButton);
             this.Controls.Add(this.viewStatisticsFormButton);
@@ -106,6 +140,7 @@
             this.Text = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -116,5 +151,8 @@
         private System.Windows.Forms.Button viewStatisticsFormButton;
         private System.Windows.Forms.Button addAppointmentButton;
         private System.Windows.Forms.Button deleteSubjectButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }
