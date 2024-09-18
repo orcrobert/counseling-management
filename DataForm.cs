@@ -1,121 +1,68 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
-
-
+using System.Data.SqlClient;
 
 namespace subjectmanager
 {
     public partial class DataForm : Form
     {
-        private SqlConnection conn;
-        private SqlDataAdapter adapter;
-        private DataTable dataTable;
-
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["subjectmanager.Properties.Settings.SubjectsConnectionString"].ConnectionString);
         public DataForm()
         {
             InitializeComponent();
-            InitializeDatabaseConnection();
-            InitializeDataGridView();
-            LoadData();
-            ConfigureForm();
+            showDataStudents();
+        }
+        public void showDataStudents()
+        {
+            conn.Open();
+            SqlDataAdapter show = new SqlDataAdapter(@"SELECT * from matricole", conn);
+            DataTable table = new DataTable();
+            show.Fill(table);
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = table;
+            dataGridView1.DataSource = bindingSource;
+            conn.Close();
         }
 
-        private void InitializeDatabaseConnection()
+        public void showDataAppointments()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["subjectmanager.Properties.Settings.SubjectsConnectionString"].ConnectionString;
-            conn = new SqlConnection(connectionString);
+            conn.Open();
+            SqlDataAdapter show = new SqlDataAdapter(@"SELECT * from appointmentsDate", conn);
+            DataTable table = new DataTable();
+            show.Fill(table);
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = table;
+            dataGridView1.DataSource = bindingSource;
+            conn.Close();
         }
 
-        private void InitializeDataGridView()
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
-            matricoleDataGridView = new DataGridView
-            {
-                Width = 1100,
-                Height = 400,
-                AutoGenerateColumns = true,
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                ReadOnly = true,
-                ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
-                {
-                    BackColor = Color.Black,
-                    ForeColor = Color.White,
-                    Font = new Font("Verdana", 10, FontStyle.Bold),
-                    Alignment = DataGridViewContentAlignment.MiddleCenter
-                },
-                DefaultCellStyle = new DataGridViewCellStyle
-                {
-                    Font = new Font("Verdana", 10),
-                    ForeColor = Color.Black,
-                    BackColor = Color.LightGray,
-                    SelectionBackColor = Color.DarkGray
-                },
-                AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle
-                {
-                    BackColor = Color.WhiteSmoke
-                },
-                GridColor = Color.LightGray,
-                RowHeadersVisible = false,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                BorderStyle = BorderStyle.None,
-            };
-            matricoleDataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-            matricoleDataGridView.Location = new Point((this.ClientSize.Width - matricoleDataGridView.Width) / 2, (this.ClientSize.Height - matricoleDataGridView.Height) / 2);
-
-            this.Controls.Add(matricoleDataGridView);
+            
         }
 
-        private void LoadData()
+        private void DataForm_Load(object sender, EventArgs e)
         {
-            try
-            {
-                conn.Open();
-                string query = "SELECT * FROM matricole";
-                adapter = new SqlDataAdapter(query, conn);
-                dataTable = new DataTable();
 
-                adapter.Fill(dataTable);
-
-                matricoleDataGridView.DataSource = dataTable;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
         }
 
-        private void ConfigureForm()
+        private void appointmentDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Text = "Subject Manager - Data Overview";
-            this.Size = new Size(1200, 600);
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.WhiteSmoke;
-
-            Label titleLabel = new Label
-            {
-                Text = "Subject List",
-                Font = new Font("Verdana", 16, FontStyle.Regular),
-                ForeColor = Color.Black,
-                Location = new Point(20, 20),
-                AutoSize = true
-            };
-            this.Controls.Add(titleLabel);
-
-            matricoleDataGridView.Location = new Point(20, 60);
+            showDataAppointments();
         }
 
-        private void Test_Load(object sender, EventArgs e)
+        private void subjectDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadData();
+            showDataStudents();
         }
     }
 }
