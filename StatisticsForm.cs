@@ -56,6 +56,28 @@ namespace subjectmanager
             numberOfGroupAppointments.Text = appointmentCount.ToString();
         }
 
+        private void countParents()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM parents", conn);
+            int parentCount = (int)cmd.ExecuteScalar();
+            label13.Text = parentCount.ToString();
+        }
+
+        private void countAppointmentsParents()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT SUM(noOfAppointments) FROM parents", conn);
+            int appointmentCount = (int)cmd.ExecuteScalar();
+            label12.Text = appointmentCount.ToString();
+
+        }
+
+        private void countCounseledParents()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM parents WHERE noOfAppointments IS NOT NULL AND noOfAppointments != 0", conn);
+            int counseledCount = (int)cmd.ExecuteScalar();
+            label11.Text = counseledCount.ToString();
+        }
+
         private void GetStatistics()
         {
             try
@@ -65,6 +87,9 @@ namespace subjectmanager
                 countAppointments();
                 countCounseled();
                 getGroupAppointments();
+                countParents();
+                countAppointmentsParents();
+                countCounseledParents();
             }
             catch (Exception ex)
             {

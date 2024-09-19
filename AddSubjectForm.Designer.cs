@@ -122,7 +122,7 @@
             // 
             this.studentRadio.AutoSize = true;
             this.studentRadio.Checked = true;
-            this.studentRadio.Location = new System.Drawing.Point(119, 64);
+            this.studentRadio.Location = new System.Drawing.Point(126, 93);
             this.studentRadio.Name = "studentRadio";
             this.studentRadio.Size = new System.Drawing.Size(80, 24);
             this.studentRadio.TabIndex = 9;
@@ -135,7 +135,7 @@
             // parentRadio
             // 
             this.parentRadio.AutoSize = true;
-            this.parentRadio.Location = new System.Drawing.Point(286, 64);
+            this.parentRadio.Location = new System.Drawing.Point(293, 93);
             this.parentRadio.Name = "parentRadio";
             this.parentRadio.Size = new System.Drawing.Size(72, 24);
             this.parentRadio.TabIndex = 10;
@@ -147,7 +147,7 @@
             // teacherRadio
             // 
             this.teacherRadio.AutoSize = true;
-            this.teacherRadio.Location = new System.Drawing.Point(452, 64);
+            this.teacherRadio.Location = new System.Drawing.Point(459, 93);
             this.teacherRadio.Name = "teacherRadio";
             this.teacherRadio.Size = new System.Drawing.Size(80, 24);
             this.teacherRadio.TabIndex = 11;
@@ -170,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 505);
+            this.ClientSize = new System.Drawing.Size(666, 502);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.teacherRadio);
             this.Controls.Add(this.parentRadio);

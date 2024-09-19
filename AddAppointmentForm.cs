@@ -26,6 +26,7 @@ namespace subjectmanager
         private SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["subjectmanager.Properties.Settings.SubjectsConnectionString"].ConnectionString);
         private static string[] Scopes = { CalendarService.Scope.Calendar };
         private static string ApplicationName = "subjectmanager";
+        private static string entity = "student";
         public AddAppointmentForm()
         {
             InitializeComponent();
@@ -36,10 +37,10 @@ namespace subjectmanager
 
         private void AddAppointmentForm_Load(object sender, EventArgs e)
         {
-            LoadSubjects();
+            LoadStudents();
         }
 
-        private void LoadSubjects()
+        private void LoadStudents()
         {
             try
             {
@@ -63,6 +64,54 @@ namespace subjectmanager
             }
         }
 
+        private void LoadParents()
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Id, name FROM parents", conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable subjectsTable = new DataTable();
+                adapter.Fill(subjectsTable);
+
+                subjectsComboBox.DataSource = subjectsTable;
+                subjectsComboBox.DisplayMember = "name";
+                subjectsComboBox.ValueMember = "name";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading parents: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void LoadTeachers()
+        {
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Id, name FROM teachers", conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable subjectsTable = new DataTable();
+                adapter.Fill(subjectsTable);
+
+                subjectsComboBox.DataSource = subjectsTable;
+                subjectsComboBox.DisplayMember = "name";
+                subjectsComboBox.ValueMember = "name";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading teachers: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             DataRowView selectedRow = (DataRowView)subjectsComboBox.SelectedItem;
@@ -71,7 +120,15 @@ namespace subjectmanager
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand("UPDATE matricole SET noOfAppointments = noOfAppointments + 1 WHERE name = @SubjectName", conn);
+                SqlCommand cmd = new SqlCommand();
+
+                if (entity == "student")
+                    cmd = new SqlCommand("UPDATE matricole SET noOfAppointments = noOfAppointments + 1 WHERE name = @SubjectName", conn);
+                else if (entity == "parent")
+                    cmd = new SqlCommand("UPDATE parents SET noOfAppointments = noOfAppointments + 1 WHERE name = @SubjectName", conn);
+                else if (entity == "teacher")
+                    cmd = new SqlCommand("UPDATE teachers SET noOfAppointments = noOfAppointments + 1 WHERE name = @SubjectName", conn);
+
                 cmd.Parameters.AddWithValue("@SubjectName", subjectName);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -81,12 +138,17 @@ namespace subjectmanager
                     DateTime selectedDate = dateTimePicker1.Value;
                     string theme = themeTextBox.Text;
 
-                    cmd = new SqlCommand("INSERT INTO appointmentsDate (name, date, theme) VALUES (@name, @date, @theme)", conn);
+                    cmd = new SqlCommand("INSERT INTO appointmentsDate (name, date, theme, type) VALUES (@name, @date, @theme, @type)", conn);
                     cmd.Parameters.AddWithValue("@name", subjectName);
                     cmd.Parameters.AddWithValue("@date", selectedDate);
                     cmd.Parameters.AddWithValue("@theme", theme);
 
-                    MessageBox.Show("Selected Date and Time: " + selectedDate.ToString());
+                    if (entity == "student")
+                        cmd.Parameters.AddWithValue("@type", "student");
+                    else if (entity == "parent")
+                        cmd.Parameters.AddWithValue("@type", "parent");
+                    else if (entity == "teacher")
+                        cmd.Parameters.AddWithValue("@type", "teacher");
 
                     cmd.ExecuteNonQuery();
 
@@ -180,7 +242,7 @@ namespace subjectmanager
 
             if (string.IsNullOrWhiteSpace(studentName))
             {
-                MessageBox.Show("Please enter the student's name.");
+                MessageBox.Show("Please enter the person's name.");
                 return;
             }
 
@@ -190,7 +252,7 @@ namespace subjectmanager
             {
                 Summary = $"Appointment with {studentName}",
                 Location = "Your location here",
-                Description = $"Appointment scheduled with {studentName}.",
+                Description = $"Appointment scheduled with {studentName} on {themeTextBox.Text}.",
 
                 Start = new EventDateTime()
                 {
@@ -228,6 +290,42 @@ namespace subjectmanager
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred while scheduling the appointment: {ex.Message}");
+            }
+        }
+
+        private void studentRadio_Click(object sender, EventArgs e)
+        {
+            entity = "student";
+            LoadStudents();
+        }
+
+        private void parentRadio_Click(object sender, EventArgs e)
+        {
+            entity = "parent";
+            LoadParents();
+        }
+
+        private void teacherRadio_Click(object sender, EventArgs e)
+        {
+            entity = "teacher";
+            LoadTeachers();
+        }
+
+        private void themeTextBox_Enter(object sender, EventArgs e)
+        {
+            if (themeTextBox.Text == "Theme")
+            {
+                themeTextBox.Text = "";
+                themeTextBox.ForeColor = Color.Black;
+            }
+        }
+
+        private void themeTextBox_Leave(object sender, EventArgs e)
+        {
+            if (themeTextBox.Text == "")
+            {
+                themeTextBox.Text = "Theme";
+                themeTextBox.ForeColor = Color.Silver;
             }
         }
     }

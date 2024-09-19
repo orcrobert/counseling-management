@@ -72,7 +72,7 @@
             // 
             // addAppointmentButton
             // 
-            this.addAppointmentButton.Location = new System.Drawing.Point(50, 417);
+            this.addAppointmentButton.Location = new System.Drawing.Point(236, 273);
             this.addAppointmentButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addAppointmentButton.Name = "addAppointmentButton";
             this.addAppointmentButton.Size = new System.Drawing.Size(276, 54);
@@ -114,7 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 760);
+            this.ClientSize = new System.Drawing.Size(744, 404);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteSubjectButton);
