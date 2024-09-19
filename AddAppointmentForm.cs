@@ -47,7 +47,9 @@ namespace subjectmanager
             scheduleButton.Location = new System.Drawing.Point(200, 260);
             scheduleButton.Click += new EventHandler(ScheduleButton_Click);
 
-            // Add to form
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm tt";
+
             this.Controls.Add(appointmentDatePicker);
             this.Controls.Add(studentNameTextBox);
             this.Controls.Add(labelDate);
@@ -87,18 +89,14 @@ namespace subjectmanager
         private void button1_Click(object sender, EventArgs e)
         {
             DataRowView selectedRow = (DataRowView)subjectsComboBox.SelectedItem;
-
-            // Assuming the "name" is the column containing the subject name
-            string subjectName = selectedRow["name"].ToString(); 
-            MessageBox.Show("Selected Subject: " + subjectName);
+            string subjectName = selectedRow["name"].ToString();
             try
             {
                 conn.Open();
 
-                // Handling the number of appointments
                 int appointmentCount;
                 if (textBox1.Text.Length == 0)
-                    appointmentCount = 1; // Default to 1 if no value is provided
+                    appointmentCount = 1;
                 else
                 {
                     try
@@ -112,27 +110,23 @@ namespace subjectmanager
                     }
                 }
 
-                // Update the number of appointments in the matricole table
                 SqlCommand cmd = new SqlCommand("UPDATE matricole SET noOfAppointments = noOfAppointments + @appointmentCount WHERE name = @SubjectName", conn);
                 cmd.Parameters.AddWithValue("@appointmentCount", appointmentCount);
                 cmd.Parameters.AddWithValue("@SubjectName", subjectName);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
 
-                // If update was successful, insert into appointmentsDate
                 if (rowsAffected > 0)
                 {
-                    // Assuming you have a DateTimePicker for selecting the date
-                    DateTime selectedDate = appointmentDatePicker.Value; // Replace with your actual DateTimePicker control
+                    DateTime selectedDate = dateTimePicker1.Value;
+                    string theme = themeTextBox.Text;
 
-                    // Assuming you have a TextBox for the theme of the appointment
-                    string theme = themeTextBox.Text; // Replace themeTextBox with the actual TextBox control for the theme
-
-                    // Insert the appointment details into the appointmentsDate table
                     cmd = new SqlCommand("INSERT INTO appointmentsDate (name, date, theme) VALUES (@name, @date, @theme)", conn);
-                    cmd.Parameters.AddWithValue("@name", subjectName);  // Insert the selected subject name
-                    cmd.Parameters.AddWithValue("@date", selectedDate); // Insert the selected date
-                    cmd.Parameters.AddWithValue("@theme", theme);       // Insert the entered theme
+                    cmd.Parameters.AddWithValue("@name", subjectName);
+                    cmd.Parameters.AddWithValue("@date", selectedDate);
+                    cmd.Parameters.AddWithValue("@theme", theme);
+
+                    MessageBox.Show("Selected Date and Time: " + selectedDate.ToString());
 
                     cmd.ExecuteNonQuery();
 
