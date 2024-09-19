@@ -172,65 +172,6 @@ namespace subjectmanager
             return service;
         }
 
-        private void ScheduleButton_Click(object sender, EventArgs e)
-        {
-            DateTime selectedDate = dateTimePicker1.Value;
-            DataRowView selectedRow = (DataRowView)subjectsComboBox.SelectedItem;
-            string studentName = selectedRow["name"].ToString();
-
-            if (string.IsNullOrWhiteSpace(studentName))
-            {
-                MessageBox.Show("Please enter the student's name.");
-                return;
-            }
-
-            CalendarService service = AuthenticateGoogleCalendar();
-
-            Event newEvent = new Event()
-            {
-                Summary = $"Appointment with {studentName}",
-                Location = "Your location here",
-                Description = $"Appointment scheduled with {studentName}.",
-
-                Start = new EventDateTime()
-                {
-                    DateTime = selectedDate,
-                    TimeZone = "America/New_York"
-                },
-                End = new EventDateTime()
-                {
-                    DateTime = selectedDate.AddHours(1),
-                    TimeZone = "America/New_York"
-                },
-
-                Attendees = new List<EventAttendee>()
-                {
-                    new EventAttendee() { Email = "student@example.com" }
-                },
-
-                Reminders = new Event.RemindersData()
-                {
-                    UseDefault = false,
-                    Overrides = new EventReminder[]
-                    {
-                        new EventReminder() { Method = "email", Minutes = 24 * 60 },
-                        new EventReminder() { Method = "popup", Minutes = 10 }
-                    }
-                }
-            };
-
-            try
-            {
-                EventsResource.InsertRequest request = service.Events.Insert(newEvent, "primary");
-                Event createdEvent = request.Execute();
-                MessageBox.Show($"Appointment scheduled successfully! Event ID: {createdEvent.Id}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while scheduling the appointment: {ex.Message}");
-            }
-        }
-
         private void scheduleButton_Click_1(object sender, EventArgs e)
         {
             DateTime selectedDate = dateTimePicker1.Value;

@@ -37,12 +37,16 @@
             this.motiveTextBox = new System.Windows.Forms.TextBox();
             this.noOfAppointmentsTextBox = new System.Windows.Forms.TextBox();
             this.addSubjectButton = new System.Windows.Forms.Button();
+            this.studentRadio = new System.Windows.Forms.RadioButton();
+            this.parentRadio = new System.Windows.Forms.RadioButton();
+            this.teacherRadio = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(316, 221);
+            this.label1.Location = new System.Drawing.Point(111, 177);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 20);
@@ -52,7 +56,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(316, 258);
+            this.label2.Location = new System.Drawing.Point(111, 214);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 20);
             this.label2.TabIndex = 1;
@@ -61,7 +65,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(316, 294);
+            this.label3.Location = new System.Drawing.Point(111, 250);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 20);
             this.label3.TabIndex = 2;
@@ -70,7 +74,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(316, 329);
+            this.label4.Location = new System.Drawing.Point(111, 285);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(184, 20);
             this.label4.TabIndex = 3;
@@ -78,47 +82,99 @@
             // 
             // nameTextBox
             // 
-            this.nameTextBox.Location = new System.Drawing.Point(538, 214);
+            this.nameTextBox.Location = new System.Drawing.Point(333, 170);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(208, 27);
             this.nameTextBox.TabIndex = 4;
             // 
             // classTextBox
             // 
-            this.classTextBox.Location = new System.Drawing.Point(538, 251);
+            this.classTextBox.Location = new System.Drawing.Point(333, 207);
             this.classTextBox.Name = "classTextBox";
             this.classTextBox.Size = new System.Drawing.Size(208, 27);
             this.classTextBox.TabIndex = 5;
             // 
             // motiveTextBox
             // 
-            this.motiveTextBox.Location = new System.Drawing.Point(538, 287);
+            this.motiveTextBox.Location = new System.Drawing.Point(333, 243);
             this.motiveTextBox.Name = "motiveTextBox";
             this.motiveTextBox.Size = new System.Drawing.Size(208, 27);
             this.motiveTextBox.TabIndex = 6;
             // 
             // noOfAppointmentsTextBox
             // 
-            this.noOfAppointmentsTextBox.Location = new System.Drawing.Point(538, 322);
+            this.noOfAppointmentsTextBox.Location = new System.Drawing.Point(333, 278);
             this.noOfAppointmentsTextBox.Name = "noOfAppointmentsTextBox";
             this.noOfAppointmentsTextBox.Size = new System.Drawing.Size(208, 27);
             this.noOfAppointmentsTextBox.TabIndex = 7;
             // 
             // addSubjectButton
             // 
-            this.addSubjectButton.Location = new System.Drawing.Point(473, 404);
+            this.addSubjectButton.Location = new System.Drawing.Point(145, 372);
             this.addSubjectButton.Name = "addSubjectButton";
-            this.addSubjectButton.Size = new System.Drawing.Size(107, 37);
+            this.addSubjectButton.Size = new System.Drawing.Size(186, 37);
             this.addSubjectButton.TabIndex = 8;
-            this.addSubjectButton.Text = "Add Subject";
+            this.addSubjectButton.Text = "Add to Database";
             this.addSubjectButton.UseVisualStyleBackColor = true;
             this.addSubjectButton.Click += new System.EventHandler(this.addSubjectButton_Click);
+            // 
+            // studentRadio
+            // 
+            this.studentRadio.AutoSize = true;
+            this.studentRadio.Checked = true;
+            this.studentRadio.Location = new System.Drawing.Point(119, 64);
+            this.studentRadio.Name = "studentRadio";
+            this.studentRadio.Size = new System.Drawing.Size(80, 24);
+            this.studentRadio.TabIndex = 9;
+            this.studentRadio.TabStop = true;
+            this.studentRadio.Text = "Student";
+            this.studentRadio.UseVisualStyleBackColor = true;
+            this.studentRadio.CheckedChanged += new System.EventHandler(this.studentRadio_CheckedChanged);
+            this.studentRadio.Click += new System.EventHandler(this.studentRadio_Click);
+            // 
+            // parentRadio
+            // 
+            this.parentRadio.AutoSize = true;
+            this.parentRadio.Location = new System.Drawing.Point(286, 64);
+            this.parentRadio.Name = "parentRadio";
+            this.parentRadio.Size = new System.Drawing.Size(72, 24);
+            this.parentRadio.TabIndex = 10;
+            this.parentRadio.Text = "Parent";
+            this.parentRadio.UseVisualStyleBackColor = true;
+            this.parentRadio.CheckedChanged += new System.EventHandler(this.parentRadio_CheckedChanged);
+            this.parentRadio.Click += new System.EventHandler(this.parentRadio_Click);
+            // 
+            // teacherRadio
+            // 
+            this.teacherRadio.AutoSize = true;
+            this.teacherRadio.Location = new System.Drawing.Point(452, 64);
+            this.teacherRadio.Name = "teacherRadio";
+            this.teacherRadio.Size = new System.Drawing.Size(80, 24);
+            this.teacherRadio.TabIndex = 11;
+            this.teacherRadio.Text = "Teacher";
+            this.teacherRadio.UseVisualStyleBackColor = true;
+            this.teacherRadio.CheckedChanged += new System.EventHandler(this.teacherRadio_CheckedChanged);
+            this.teacherRadio.Click += new System.EventHandler(this.teacherRadio_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(355, 372);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(186, 37);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Clear";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // AddSubjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1302, 826);
+            this.ClientSize = new System.Drawing.Size(708, 505);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.teacherRadio);
+            this.Controls.Add(this.parentRadio);
+            this.Controls.Add(this.studentRadio);
             this.Controls.Add(this.addSubjectButton);
             this.Controls.Add(this.noOfAppointmentsTextBox);
             this.Controls.Add(this.motiveTextBox);
@@ -149,5 +205,9 @@
         private System.Windows.Forms.TextBox motiveTextBox;
         private System.Windows.Forms.TextBox noOfAppointmentsTextBox;
         private System.Windows.Forms.Button addSubjectButton;
+        private System.Windows.Forms.RadioButton studentRadio;
+        private System.Windows.Forms.RadioButton parentRadio;
+        private System.Windows.Forms.RadioButton teacherRadio;
+        private System.Windows.Forms.Button button1;
     }
 }
