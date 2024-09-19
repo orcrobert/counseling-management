@@ -88,6 +88,64 @@ namespace subjectmanager
             currentTable = "appointmentsDate";
         }
 
+        public void showDataParents(string searchQuery = "")
+        {
+            conn.Open();
+
+            string query = @"SELECT * FROM parents";
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                query += " WHERE name LIKE @search OR phone LIKE @search" +
+                    " OR email LIKE @search OR noOfAppointments LIKE @search";
+            }
+
+            SqlDataAdapter show = new SqlDataAdapter(query, conn);
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                show.SelectCommand.Parameters.AddWithValue("@search", "%" + searchQuery + "%");
+            }
+
+            DataTable table = new DataTable();
+            table.TableName = "parents";
+            show.Fill(table);
+
+            dataGridView1.Columns.Clear();
+            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.DataSource = table;
+
+            conn.Close();
+            currentTable = "parents";
+        }
+
+        public void showDataTeachers(string searchQuery = "")
+        {
+            conn.Open();
+
+            string query = @"SELECT * FROM teachers";
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                query += " WHERE name LIKE @search OR phone LIKE @search" +
+                    " OR email LIKE @search OR noOfAppointments LIKE @search";
+            }
+
+            SqlDataAdapter show = new SqlDataAdapter(query, conn);
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                show.SelectCommand.Parameters.AddWithValue("@search", "%" + searchQuery + "%");
+            }
+
+            DataTable table = new DataTable();
+            table.TableName = "teachers";
+            show.Fill(table);
+
+            dataGridView1.Columns.Clear();
+            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.DataSource = table;
+
+            conn.Close();
+            currentTable = "teachers";
+        }
+
         private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
         {
             string searchQuery = toolStripTextBox1.Text;
@@ -102,6 +160,14 @@ namespace subjectmanager
             {
                 showDataAppointments(searchQuery);
             }
+            else if (currentTable == "parents")
+            {
+                showDataParents(searchQuery);
+            }
+            else if (currentTable == "teachers")
+            {
+                showDataTeachers(searchQuery);
+            }
         }
 
         private void appointmentDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -112,10 +178,6 @@ namespace subjectmanager
         private void subjectDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showDataStudents();
-        }
-
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
         }
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)
@@ -135,6 +197,16 @@ namespace subjectmanager
         {
             toolStripTextBox1.Text = "Search";
             toolStripTextBox1.ForeColor = Color.Silver;
+        }
+
+        private void parentDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showDataParents();
+        }
+
+        private void teacherDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showDataTeachers();
         }
     }
 }

@@ -36,6 +36,8 @@
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.subjectDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appointmentDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parentDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teacherDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.idColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.nameColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.classColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
@@ -82,7 +84,9 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1,
             this.subjectDatabaseToolStripMenuItem,
-            this.appointmentDatabaseToolStripMenuItem});
+            this.appointmentDatabaseToolStripMenuItem,
+            this.parentDatabaseToolStripMenuItem,
+            this.teacherDatabaseToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1152, 27);
@@ -102,8 +106,9 @@
             // 
             // subjectDatabaseToolStripMenuItem
             // 
+            this.subjectDatabaseToolStripMenuItem.Margin = new System.Windows.Forms.Padding(2);
             this.subjectDatabaseToolStripMenuItem.Name = "subjectDatabaseToolStripMenuItem";
-            this.subjectDatabaseToolStripMenuItem.Size = new System.Drawing.Size(109, 23);
+            this.subjectDatabaseToolStripMenuItem.Size = new System.Drawing.Size(109, 19);
             this.subjectDatabaseToolStripMenuItem.Text = "Subject Database";
             this.subjectDatabaseToolStripMenuItem.Click += new System.EventHandler(this.subjectDatabaseToolStripMenuItem_Click);
             // 
@@ -113,6 +118,20 @@
             this.appointmentDatabaseToolStripMenuItem.Size = new System.Drawing.Size(141, 23);
             this.appointmentDatabaseToolStripMenuItem.Text = "Appointment Database";
             this.appointmentDatabaseToolStripMenuItem.Click += new System.EventHandler(this.appointmentDatabaseToolStripMenuItem_Click);
+            // 
+            // parentDatabaseToolStripMenuItem
+            // 
+            this.parentDatabaseToolStripMenuItem.Name = "parentDatabaseToolStripMenuItem";
+            this.parentDatabaseToolStripMenuItem.Size = new System.Drawing.Size(104, 23);
+            this.parentDatabaseToolStripMenuItem.Text = "Parent Database";
+            this.parentDatabaseToolStripMenuItem.Click += new System.EventHandler(this.parentDatabaseToolStripMenuItem_Click);
+            // 
+            // teacherDatabaseToolStripMenuItem
+            // 
+            this.teacherDatabaseToolStripMenuItem.Name = "teacherDatabaseToolStripMenuItem";
+            this.teacherDatabaseToolStripMenuItem.Size = new System.Drawing.Size(110, 23);
+            this.teacherDatabaseToolStripMenuItem.Text = "Teacher Database";
+            this.teacherDatabaseToolStripMenuItem.Click += new System.EventHandler(this.teacherDatabaseToolStripMenuItem_Click);
             // 
             // idColumn
             // 
@@ -195,5 +214,7 @@
         private System.Windows.Forms.ToolStripMenuItem subjectDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem appointmentDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.ToolStripMenuItem parentDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teacherDatabaseToolStripMenuItem;
     }
 }

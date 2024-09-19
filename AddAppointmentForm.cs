@@ -29,32 +29,9 @@ namespace subjectmanager
         public AddAppointmentForm()
         {
             InitializeComponent();
-            appointmentDatePicker = new DateTimePicker();
-            appointmentDatePicker.Format = DateTimePickerFormat.Custom;
-            appointmentDatePicker.CustomFormat = "MM/dd/yyyy hh:mm tt";
-            studentNameTextBox = new System.Windows.Forms.TextBox();
-            labelDate = new System.Windows.Forms.Label();
-            labelStudent = new System.Windows.Forms.Label();
-            scheduleButton = new System.Windows.Forms.Button();
-
-            labelDate.Text = "Appointment Date & Time:";
-            labelDate.Location = new System.Drawing.Point(20, 180);
-            appointmentDatePicker.Location = new System.Drawing.Point(200, 180);
-            labelStudent.Text = "Student Name:";
-            labelStudent.Location = new System.Drawing.Point(20, 220);
-            studentNameTextBox.Location = new System.Drawing.Point(200, 220);
-            scheduleButton.Text = "Schedule Appointment";
-            scheduleButton.Location = new System.Drawing.Point(200, 260);
-            scheduleButton.Click += new EventHandler(ScheduleButton_Click);
 
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm tt";
-
-            this.Controls.Add(appointmentDatePicker);
-            this.Controls.Add(studentNameTextBox);
-            this.Controls.Add(labelDate);
-            this.Controls.Add(labelStudent);
-            this.Controls.Add(scheduleButton);
         }
 
         private void AddAppointmentForm_Load(object sender, EventArgs e)
@@ -94,24 +71,7 @@ namespace subjectmanager
             {
                 conn.Open();
 
-                int appointmentCount;
-                if (textBox1.Text.Length == 0)
-                    appointmentCount = 1;
-                else
-                {
-                    try
-                    {
-                        appointmentCount = int.Parse(textBox1.Text);
-                    }
-                    catch (FormatException ex)
-                    {
-                        MessageBox.Show("Number of appointments must be an integer!");
-                        return;
-                    }
-                }
-
-                SqlCommand cmd = new SqlCommand("UPDATE matricole SET noOfAppointments = noOfAppointments + @appointmentCount WHERE name = @SubjectName", conn);
-                cmd.Parameters.AddWithValue("@appointmentCount", appointmentCount);
+                SqlCommand cmd = new SqlCommand("UPDATE matricole SET noOfAppointments = noOfAppointments + 1 WHERE name = @SubjectName", conn);
                 cmd.Parameters.AddWithValue("@SubjectName", subjectName);
 
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -214,8 +174,68 @@ namespace subjectmanager
 
         private void ScheduleButton_Click(object sender, EventArgs e)
         {
-            DateTime selectedDate = appointmentDatePicker.Value;
-            string studentName = studentNameTextBox.Text;
+            DateTime selectedDate = dateTimePicker1.Value;
+            DataRowView selectedRow = (DataRowView)subjectsComboBox.SelectedItem;
+            string studentName = selectedRow["name"].ToString();
+
+            if (string.IsNullOrWhiteSpace(studentName))
+            {
+                MessageBox.Show("Please enter the student's name.");
+                return;
+            }
+
+            CalendarService service = AuthenticateGoogleCalendar();
+
+            Event newEvent = new Event()
+            {
+                Summary = $"Appointment with {studentName}",
+                Location = "Your location here",
+                Description = $"Appointment scheduled with {studentName}.",
+
+                Start = new EventDateTime()
+                {
+                    DateTime = selectedDate,
+                    TimeZone = "America/New_York"
+                },
+                End = new EventDateTime()
+                {
+                    DateTime = selectedDate.AddHours(1),
+                    TimeZone = "America/New_York"
+                },
+
+                Attendees = new List<EventAttendee>()
+                {
+                    new EventAttendee() { Email = "student@example.com" }
+                },
+
+                Reminders = new Event.RemindersData()
+                {
+                    UseDefault = false,
+                    Overrides = new EventReminder[]
+                    {
+                        new EventReminder() { Method = "email", Minutes = 24 * 60 },
+                        new EventReminder() { Method = "popup", Minutes = 10 }
+                    }
+                }
+            };
+
+            try
+            {
+                EventsResource.InsertRequest request = service.Events.Insert(newEvent, "primary");
+                Event createdEvent = request.Execute();
+                MessageBox.Show($"Appointment scheduled successfully! Event ID: {createdEvent.Id}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while scheduling the appointment: {ex.Message}");
+            }
+        }
+
+        private void scheduleButton_Click_1(object sender, EventArgs e)
+        {
+            DateTime selectedDate = dateTimePicker1.Value;
+            DataRowView selectedRow = (DataRowView)subjectsComboBox.SelectedItem;
+            string studentName = selectedRow["name"].ToString();
 
             if (string.IsNullOrWhiteSpace(studentName))
             {
