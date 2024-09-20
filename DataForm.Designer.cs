@@ -32,23 +32,26 @@
             this.subjectsDataSet = new subjectmanager.SubjectsDataSet();
             this.subjectsDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.subjectDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.appointmentDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.parentDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.teacherDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.idColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.nameColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.classColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.motiveColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.appointmentsColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.subjectBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.subjectDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.appointmentDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parentDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teacherDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.subjectBindingSource)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // subjectsDataSet
@@ -78,6 +81,50 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1152, 550);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // idColumn
+            // 
+            this.idColumn.DataPropertyName = "ID";
+            this.idColumn.FilteringEnabled = false;
+            this.idColumn.HeaderText = "ID";
+            this.idColumn.Name = "idColumn";
+            this.idColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.DataPropertyName = "name";
+            this.nameColumn.FilteringEnabled = false;
+            this.nameColumn.HeaderText = "name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // classColumn
+            // 
+            this.classColumn.DataPropertyName = "classOf";
+            this.classColumn.FilteringEnabled = false;
+            this.classColumn.HeaderText = "classOf";
+            this.classColumn.Name = "classColumn";
+            this.classColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // motiveColumn
+            // 
+            this.motiveColumn.DataPropertyName = "motive";
+            this.motiveColumn.FilteringEnabled = false;
+            this.motiveColumn.HeaderText = "motive";
+            this.motiveColumn.Name = "motiveColumn";
+            this.motiveColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // appointmentsColumn
+            // 
+            this.appointmentsColumn.DataPropertyName = "noOfAppointments";
+            this.appointmentsColumn.FilteringEnabled = false;
+            this.appointmentsColumn.HeaderText = "noOfAppointments";
+            this.appointmentsColumn.Name = "appointmentsColumn";
+            this.appointmentsColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // subjectBindingSource
+            // 
+            this.subjectBindingSource.DataSource = typeof(subjectmanager.Subject);
             // 
             // menuStrip1
             // 
@@ -133,55 +180,29 @@
             this.teacherDatabaseToolStripMenuItem.Text = "Teacher Database";
             this.teacherDatabaseToolStripMenuItem.Click += new System.EventHandler(this.teacherDatabaseToolStripMenuItem_Click);
             // 
-            // idColumn
+            // statusStrip1
             // 
-            this.idColumn.DataPropertyName = "ID";
-            this.idColumn.FilteringEnabled = false;
-            this.idColumn.HeaderText = "ID";
-            this.idColumn.Name = "idColumn";
-            this.idColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 554);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1152, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // nameColumn
+            // toolStripStatusLabel1
             // 
-            this.nameColumn.DataPropertyName = "name";
-            this.nameColumn.FilteringEnabled = false;
-            this.nameColumn.HeaderText = "name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // classColumn
-            // 
-            this.classColumn.DataPropertyName = "classOf";
-            this.classColumn.FilteringEnabled = false;
-            this.classColumn.HeaderText = "classOf";
-            this.classColumn.Name = "classColumn";
-            this.classColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // motiveColumn
-            // 
-            this.motiveColumn.DataPropertyName = "motive";
-            this.motiveColumn.FilteringEnabled = false;
-            this.motiveColumn.HeaderText = "motive";
-            this.motiveColumn.Name = "motiveColumn";
-            this.motiveColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // appointmentsColumn
-            // 
-            this.appointmentsColumn.DataPropertyName = "noOfAppointments";
-            this.appointmentsColumn.FilteringEnabled = false;
-            this.appointmentsColumn.HeaderText = "noOfAppointments";
-            this.appointmentsColumn.Name = "appointmentsColumn";
-            this.appointmentsColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // subjectBindingSource
-            // 
-            this.subjectBindingSource.DataSource = typeof(subjectmanager.Subject);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(68, 17);
+            this.toolStripStatusLabel1.Text = "Clear Filters";
+            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
             // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1152, 576);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -192,9 +213,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.subjectBindingSource)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.subjectBindingSource)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,5 +239,7 @@
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripMenuItem parentDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teacherDatabaseToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

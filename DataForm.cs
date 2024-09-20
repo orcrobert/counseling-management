@@ -208,5 +208,25 @@ namespace subjectmanager
         {
             showDataTeachers();
         }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+            if (currentTable == "matricole")
+            {
+                showDataStudents("");
+            }
+            else if (currentTable == "appointmentsDate")
+            {
+                showDataAppointments("");
+            }
+            else if (currentTable == "parents")
+            {
+                showDataParents("");
+            }
+            else if (currentTable == "teachers")
+            {
+                showDataTeachers("");
+            }
+        }
     }
 }
