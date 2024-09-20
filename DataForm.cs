@@ -17,12 +17,40 @@ namespace subjectmanager
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["subjectmanager.Properties.Settings.SubjectsConnectionString"].ConnectionString);
 
         private string currentTable = "matricole";
+        DataGridView tempDtg = new DataGridView();
 
         public DataForm()
         {
             InitializeComponent();
             showDataStudents();
             toolStripTextBox1.TextChanged += toolStripTextBox1_TextChanged;
+            editRowButton.Enabled = false;
+            hideDatePickers();
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
+        }
+
+        private void hideDatePickers()
+        {
+            startDatePicker.Visible = false;
+            endDatePicker.Visible = false;
+            filterByDateButton.Visible = false;
+            dateFilterActivityLabel.Visible = false;
+        }
+
+        private void showDatePickers()
+        {
+            startDatePicker.Visible = true;
+            endDatePicker.Visible = true;
+            filterByDateButton.Visible = true;
+            dateFilterActivityLabel.Visible = true;
+        }
+
+        private void resetDatePickers()
+        {
+            startDatePicker.Value = DateTime.Now;
+            endDatePicker.Value = DateTime.Now;
+            dateFilterActivityLabel.Text = "(inactive date filter)";
+            dateFilterActivityLabel.ForeColor = Color.FromArgb(192, 0, 0);
         }
 
         private void DataForm_Load(object sender, EventArgs e)
@@ -56,21 +84,24 @@ namespace subjectmanager
 
             conn.Close();
 
+            hideDatePickers();
             currentTable = "matricole";
         }
 
         public void showDataAppointments(string searchQuery = "")
         {
+            showDatePickers();
             conn.Open();
 
             string query = @"SELECT * FROM appointmentsDate";
+
             if (!string.IsNullOrEmpty(searchQuery))
             {
-                query += " WHERE name LIKE @search OR date LIKE @search" +
-                    " OR theme LIKE @search";
+                query += " WHERE name LIKE @search OR date LIKE @search OR theme LIKE @search";
             }
 
             SqlDataAdapter show = new SqlDataAdapter(query, conn);
+
             if (!string.IsNullOrEmpty(searchQuery))
             {
                 show.SelectCommand.Parameters.AddWithValue("@search", "%" + searchQuery + "%");
@@ -114,6 +145,8 @@ namespace subjectmanager
             dataGridView1.DataSource = table;
 
             conn.Close();
+
+            hideDatePickers();
             currentTable = "parents";
         }
 
@@ -143,6 +176,8 @@ namespace subjectmanager
             dataGridView1.DataSource = table;
 
             conn.Close();
+
+            hideDatePickers();
             currentTable = "teachers";
         }
 
@@ -217,6 +252,7 @@ namespace subjectmanager
             }
             else if (currentTable == "appointmentsDate")
             {
+                resetDatePickers();
                 showDataAppointments("");
             }
             else if (currentTable == "parents")
@@ -227,6 +263,63 @@ namespace subjectmanager
             {
                 showDataTeachers("");
             }
+        }
+
+        private void filterByDateButton_Click(object sender, EventArgs e)
+        {
+            DateTime startDate = startDatePicker.Value;
+            DateTime endDate = endDatePicker.Value;
+
+            dateFilterActivityLabel.Text = "(active date filter)";
+            dateFilterActivityLabel.ForeColor = Color.Green;
+
+            if (startDate > endDate)
+            {
+                MessageBox.Show("Start date cannot be after the end date.");
+                return;
+            }
+
+            conn.Open();
+
+            string query = @"SELECT * FROM appointmentsDate WHERE date BETWEEN @startDate AND @endDate";
+
+            SqlDataAdapter show = new SqlDataAdapter(query, conn);
+            show.SelectCommand.Parameters.AddWithValue("@startDate", startDate);
+            show.SelectCommand.Parameters.AddWithValue("@endDate", endDate);
+
+            DataTable table = new DataTable();
+            table.TableName = "appointmentsDate";
+            show.Fill(table);
+
+            dataGridView1.Columns.Clear();
+            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.DataSource = table;
+
+            conn.Close();
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count != 0)
+            {
+                editRowButton.Enabled = true;
+            }
+            else
+            {
+                editRowButton.Enabled= false;
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            tempDtg = dataGridView1;
+            editRowButton.Enabled = true;
+        }
+
+        private void editRowButton_Click(object sender, EventArgs e)
+        {
+            EditRowForm editRowForm = new EditRowForm(tempDtg, currentTable);
+            editRowForm.ShowDialog();
         }
     }
 }

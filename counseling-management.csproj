@@ -105,6 +105,12 @@
     <Compile Include="DeleteSubjectForm.Designer.cs">
       <DependentUpon>DeleteSubjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditRowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditRowForm.Designer.cs">
+      <DependentUpon>EditRowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddSubjectForm.resx">
       <DependentUpon>AddSubjectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditRowForm.resx">
+      <DependentUpon>EditRowForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
