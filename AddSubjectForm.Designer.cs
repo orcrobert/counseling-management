@@ -41,6 +41,9 @@
             this.parentRadio = new System.Windows.Forms.RadioButton();
             this.teacherRadio = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
+            this.schoolTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupRadio = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label1
@@ -110,7 +113,7 @@
             // 
             // addSubjectButton
             // 
-            this.addSubjectButton.Location = new System.Drawing.Point(145, 372);
+            this.addSubjectButton.Location = new System.Drawing.Point(145, 397);
             this.addSubjectButton.Name = "addSubjectButton";
             this.addSubjectButton.Size = new System.Drawing.Size(186, 37);
             this.addSubjectButton.TabIndex = 8;
@@ -122,7 +125,7 @@
             // 
             this.studentRadio.AutoSize = true;
             this.studentRadio.Checked = true;
-            this.studentRadio.Location = new System.Drawing.Point(126, 93);
+            this.studentRadio.Location = new System.Drawing.Point(147, 91);
             this.studentRadio.Name = "studentRadio";
             this.studentRadio.Size = new System.Drawing.Size(80, 24);
             this.studentRadio.TabIndex = 9;
@@ -135,7 +138,7 @@
             // parentRadio
             // 
             this.parentRadio.AutoSize = true;
-            this.parentRadio.Location = new System.Drawing.Point(293, 93);
+            this.parentRadio.Location = new System.Drawing.Point(245, 91);
             this.parentRadio.Name = "parentRadio";
             this.parentRadio.Size = new System.Drawing.Size(72, 24);
             this.parentRadio.TabIndex = 10;
@@ -147,7 +150,7 @@
             // teacherRadio
             // 
             this.teacherRadio.AutoSize = true;
-            this.teacherRadio.Location = new System.Drawing.Point(459, 93);
+            this.teacherRadio.Location = new System.Drawing.Point(335, 91);
             this.teacherRadio.Name = "teacherRadio";
             this.teacherRadio.Size = new System.Drawing.Size(80, 24);
             this.teacherRadio.TabIndex = 11;
@@ -158,7 +161,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(355, 372);
+            this.button1.Location = new System.Drawing.Point(355, 397);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(186, 37);
             this.button1.TabIndex = 12;
@@ -166,11 +169,41 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // schoolTextBox
+            // 
+            this.schoolTextBox.Location = new System.Drawing.Point(331, 311);
+            this.schoolTextBox.Name = "schoolTextBox";
+            this.schoolTextBox.Size = new System.Drawing.Size(208, 27);
+            this.schoolTextBox.TabIndex = 14;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(109, 318);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 20);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "School";
+            // 
+            // groupRadio
+            // 
+            this.groupRadio.AutoSize = true;
+            this.groupRadio.Location = new System.Drawing.Point(441, 91);
+            this.groupRadio.Name = "groupRadio";
+            this.groupRadio.Size = new System.Drawing.Size(70, 24);
+            this.groupRadio.TabIndex = 15;
+            this.groupRadio.Text = "Group";
+            this.groupRadio.UseVisualStyleBackColor = true;
+            this.groupRadio.Click += new System.EventHandler(this.groupRadio_Click);
+            // 
             // AddSubjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 502);
+            this.Controls.Add(this.groupRadio);
+            this.Controls.Add(this.schoolTextBox);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.teacherRadio);
             this.Controls.Add(this.parentRadio);
@@ -209,5 +242,8 @@
         private System.Windows.Forms.RadioButton parentRadio;
         private System.Windows.Forms.RadioButton teacherRadio;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox schoolTextBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RadioButton groupRadio;
     }
 }

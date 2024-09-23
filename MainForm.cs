@@ -151,26 +151,23 @@ namespace subjectmanager
 
             if (confirmResult == DialogResult.Yes)
             {
-                // The SQL query to delete all rows from the 'matricole' table
                 string query = "DELETE FROM matricole";
 
                 try
                 {
-                    conn.Open();  // Open the SQL connection
-                    SqlCommand cmd = new SqlCommand(query, conn);  // Prepare the SQL command
-                    cmd.ExecuteNonQuery();  // Execute the command to delete all data
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
 
                     MessageBox.Show("All data from the 'Matricole' table has been deleted.");
-
-                    // After deleting, reload the updated (empty) table in the DataGridView
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error deleting data: " + ex.Message);  // Show an error message if something goes wrong
+                    MessageBox.Show("Error deleting data: " + ex.Message);
                 }
                 finally
                 {
-                    conn.Close();  // Close the connection, whether successful or not
+                    conn.Close();
                 }
             }
         }

@@ -180,6 +180,35 @@ namespace subjectmanager
             hideDatePickers();
             currentTable = "teachers";
         }
+        public void showDataGroups(string searchQuery = "")
+        {
+            conn.Open();
+
+            string query = @"SELECT * FROM groupAppointments";
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                query += " WHERE name LIKE @search OR noOfAppointments LIKE @search";
+            }
+
+            SqlDataAdapter show = new SqlDataAdapter(query, conn);
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                show.SelectCommand.Parameters.AddWithValue("@search", "%" + searchQuery + "%");
+            }
+
+            DataTable table = new DataTable();
+            table.TableName = "groupAppointments";
+            show.Fill(table);
+
+            dataGridView1.Columns.Clear();
+            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.DataSource = table;
+
+            conn.Close();
+
+            hideDatePickers();
+            currentTable = "groupAppointments";
+        }
 
         private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -202,6 +231,10 @@ namespace subjectmanager
             else if (currentTable == "teachers")
             {
                 showDataTeachers(searchQuery);
+            }
+            else if (currentTable == "groupAppointments")
+            {
+                showDataGroups(searchQuery);
             }
         }
 
@@ -263,6 +296,10 @@ namespace subjectmanager
             {
                 showDataTeachers("");
             }
+            else if (currentTable == "groupAppointments")
+            {
+                showDataGroups("");
+            }
         }
 
         private void filterByDateButton_Click(object sender, EventArgs e)
@@ -320,6 +357,54 @@ namespace subjectmanager
         {
             EditRowForm editRowForm = new EditRowForm(tempDtg, currentTable);
             editRowForm.ShowDialog();
+        }
+
+        private void groupsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showDataGroups();
+        }
+
+        private void addRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddSubjectForm form = new AddSubjectForm();
+            form.ShowDialog();
+        }
+
+        private void removeRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int rowID = Int32.Parse(tempDtg.CurrentRow.Cells[0].Value.ToString());
+            string query = "";
+
+            if (currentTable == "matricole")
+            {
+                query = "DELETE FROM matricole WHERE Id = @Id";
+            }
+            else if (currentTable == "appointmentsDate")
+            {
+                query = "DELETE FROM appointmentsDate WHERE Id = @Id";
+            }
+            else if (currentTable == "parents")
+            {
+                query = "DELETE FROM parents WHERE Id = @Id";
+            }
+            else if (currentTable == "teachers")
+            {
+                query = "DELETE FROM teachers WHERE Id = @Id";
+            }
+            else if (currentTable == "groupAppointments")
+            {
+                query = "DELETE FROM groupAppointments WHERE Id = @Id";
+            }
+
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@Id", rowID);
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+
+            MessageBox.Show("Record deleted successfully!");
         }
     }
 }

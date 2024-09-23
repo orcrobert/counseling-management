@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,9 +27,20 @@ namespace subjectmanager
 
             nameTextBox.Text = row.CurrentRow.Cells[1].Value.ToString();
             classTextBox.Text = row.CurrentRow.Cells[2].Value.ToString();
-            motiveTextBox.Text = row.CurrentRow.Cells[3].Value.ToString();
-            schoolTextBox.Text = row.CurrentRow.Cells[4].Value.ToString();
-            noOfAppointmentsTextBox.Text = row.CurrentRow.Cells[5].Value.ToString();
+
+            if (currentTable != "groupAppointments")
+            {
+                motiveTextBox.Text = row.CurrentRow.Cells[3].Value.ToString();
+                if (currentTable == "students")
+                {
+                    schoolTextBox.Text = row.CurrentRow.Cells[4].Value.ToString();
+                    noOfAppointmentsTextBox.Text = row.CurrentRow.Cells[5].Value.ToString();
+                }
+                else
+                {
+                    noOfAppointmentsTextBox.Text = row.CurrentRow.Cells[4].Value.ToString();
+                }
+            }
 
             if (currentTable == "students")
                 changeToStudentLabels();
@@ -36,6 +48,8 @@ namespace subjectmanager
                 changeToAppointmentLables();
             else if (currentTable == "parents" || currentTable == "teachers")
                 changeToParentTeacherLables();
+            else if (currentTable == "groupAppointments")
+                changeToGroupLables();
         }
 
         private void changeToStudentLabels()
@@ -44,6 +58,13 @@ namespace subjectmanager
             label2.Text = "Class";
             label3.Text = "Motive";
             label4.Text = "Number of appointments";
+
+            label3.Visible = true;
+            label4.Visible = true;
+            label5.Visible = true;
+            motiveTextBox.Visible = true;
+            schoolTextBox.Visible = true;
+            noOfAppointmentsTextBox.Visible = true;
             label5.Visible = true;
             schoolTextBox.Visible = true;
         }
@@ -54,6 +75,13 @@ namespace subjectmanager
             label2.Text = "Date";
             label3.Text = "Theme";
             label4.Text = "Type";
+
+            label3.Visible = true;
+            label4.Visible = true;
+            label5.Visible = true;
+            motiveTextBox.Visible = true;
+            schoolTextBox.Visible = true;
+            noOfAppointmentsTextBox.Visible = true;
             label5.Visible = false;
             schoolTextBox.Visible = false;
         }
@@ -64,8 +92,28 @@ namespace subjectmanager
             label2.Text = "Phone";
             label3.Text = "Email";
             label4.Text = "Number of appointments";
+
+            label3.Visible = true;
+            label4.Visible = true;
+            label5.Visible = true;
+            motiveTextBox.Visible = true;
+            schoolTextBox.Visible = true;
+            noOfAppointmentsTextBox.Visible = true;
             label5.Visible = false;
             schoolTextBox.Visible = false;
+        }
+
+        private void changeToGroupLables()
+        {
+            label1.Text = "Name";
+            label2.Text = "Number of appointments";
+
+            label3.Visible = false;
+            label4.Visible = false;
+            label5.Visible = false;
+            motiveTextBox.Visible = false;
+            schoolTextBox.Visible = false;
+            noOfAppointmentsTextBox.Visible = false;
         }
 
         private void EditRowForm_Load(object sender, EventArgs e)
@@ -101,7 +149,7 @@ namespace subjectmanager
                 cmd.Parameters.AddWithValue("@name", nameTextBox.Text);
                 cmd.Parameters.AddWithValue("@date", temp);
                 cmd.Parameters.AddWithValue("@theme", motiveTextBox.Text);
-                cmd.Parameters.AddWithValue("@type", Int32.Parse(noOfAppointmentsTextBox.Text));
+                cmd.Parameters.AddWithValue("@type", noOfAppointmentsTextBox.Text);
                 cmd.Parameters.AddWithValue("@Id", rowID);
             }
             else if (this.currentTable == "parents")
@@ -124,6 +172,16 @@ namespace subjectmanager
                 cmd.Parameters.AddWithValue("@phone", classTextBox.Text);
                 cmd.Parameters.AddWithValue("@email", motiveTextBox.Text);
                 cmd.Parameters.AddWithValue("@noOfAppointments", Int32.Parse(noOfAppointmentsTextBox.Text));
+                cmd.Parameters.AddWithValue("@Id", rowID);
+            }
+
+            else if (this.currentTable == "groupAppointments")
+            {
+                query = "UPDATE groupAppointments SET name = @name, noOfAppointments = @noOfAppointments WHERE Id = @Id";
+                cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@name", nameTextBox.Text);
+                cmd.Parameters.AddWithValue("@noOfAppointments", Int32.Parse(classTextBox.Text));
                 cmd.Parameters.AddWithValue("@Id", rowID);
             }
 

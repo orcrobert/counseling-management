@@ -40,17 +40,21 @@
             this.teacherDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.dateFilterActivityLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.endDatePicker = new System.Windows.Forms.DateTimePicker();
             this.filterByDateButton = new System.Windows.Forms.Button();
-            this.dateFilterActivityLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.editRowButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.idColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.nameColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.classColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.motiveColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.appointmentsColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.subjectBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.editRowButton = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -84,7 +88,7 @@
             this.dataGridView1.DataSource = this.subjectBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(0, 27);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1152, 550);
+            this.dataGridView1.Size = new System.Drawing.Size(1482, 669);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
@@ -97,10 +101,11 @@
             this.appointmentDatabaseToolStripMenuItem,
             this.parentDatabaseToolStripMenuItem,
             this.teacherDatabaseToolStripMenuItem,
-            this.editRowButton});
+            this.groupsToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1152, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(1482, 27);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -149,9 +154,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.dateFilterActivityLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 554);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 699);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1152, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1482, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -162,31 +167,6 @@
             this.toolStripStatusLabel1.Text = "Clear Filters / Refresh";
             this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
-            // startDatePicker
-            // 
-            this.startDatePicker.Location = new System.Drawing.Point(653, 4);
-            this.startDatePicker.Name = "startDatePicker";
-            this.startDatePicker.Size = new System.Drawing.Size(200, 20);
-            this.startDatePicker.TabIndex = 4;
-            this.startDatePicker.Value = new System.DateTime(2024, 9, 20, 15, 38, 0, 0);
-            // 
-            // endDatePicker
-            // 
-            this.endDatePicker.Location = new System.Drawing.Point(859, 4);
-            this.endDatePicker.Name = "endDatePicker";
-            this.endDatePicker.Size = new System.Drawing.Size(200, 20);
-            this.endDatePicker.TabIndex = 5;
-            // 
-            // filterByDateButton
-            // 
-            this.filterByDateButton.Location = new System.Drawing.Point(1065, 1);
-            this.filterByDateButton.Name = "filterByDateButton";
-            this.filterByDateButton.Size = new System.Drawing.Size(75, 23);
-            this.filterByDateButton.TabIndex = 6;
-            this.filterByDateButton.Text = "Filter";
-            this.filterByDateButton.UseVisualStyleBackColor = true;
-            this.filterByDateButton.Click += new System.EventHandler(this.filterByDateButton_Click);
-            // 
             // dateFilterActivityLabel
             // 
             this.dateFilterActivityLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -194,12 +174,61 @@
             this.dateFilterActivityLabel.Size = new System.Drawing.Size(109, 17);
             this.dateFilterActivityLabel.Text = "(inactive date filter)";
             // 
-            // editRowButton
+            // startDatePicker
             // 
-            this.editRowButton.Name = "editRowButton";
-            this.editRowButton.Size = new System.Drawing.Size(65, 23);
-            this.editRowButton.Text = "Edit Row";
-            this.editRowButton.Click += new System.EventHandler(this.editRowButton_Click);
+            this.startDatePicker.Location = new System.Drawing.Point(984, 1);
+            this.startDatePicker.Name = "startDatePicker";
+            this.startDatePicker.Size = new System.Drawing.Size(200, 20);
+            this.startDatePicker.TabIndex = 4;
+            this.startDatePicker.Value = new System.DateTime(2024, 9, 20, 15, 38, 0, 0);
+            // 
+            // endDatePicker
+            // 
+            this.endDatePicker.Location = new System.Drawing.Point(1190, 1);
+            this.endDatePicker.Name = "endDatePicker";
+            this.endDatePicker.Size = new System.Drawing.Size(200, 20);
+            this.endDatePicker.TabIndex = 5;
+            // 
+            // filterByDateButton
+            // 
+            this.filterByDateButton.Location = new System.Drawing.Point(1395, 0);
+            this.filterByDateButton.Name = "filterByDateButton";
+            this.filterByDateButton.Size = new System.Drawing.Size(75, 23);
+            this.filterByDateButton.TabIndex = 6;
+            this.filterByDateButton.Text = "Filter";
+            this.filterByDateButton.UseVisualStyleBackColor = true;
+            this.filterByDateButton.Click += new System.EventHandler(this.filterByDateButton_Click);
+            // 
+            // groupsToolStripMenuItem
+            // 
+            this.groupsToolStripMenuItem.Name = "groupsToolStripMenuItem";
+            this.groupsToolStripMenuItem.Size = new System.Drawing.Size(57, 23);
+            this.groupsToolStripMenuItem.Text = "Groups";
+            this.groupsToolStripMenuItem.Click += new System.EventHandler(this.groupsToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addRowToolStripMenuItem,
+            this.removeRowToolStripMenuItem,
+            this.editRowButton});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 23);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // addRowToolStripMenuItem
+            // 
+            this.addRowToolStripMenuItem.Name = "addRowToolStripMenuItem";
+            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addRowToolStripMenuItem.Text = "Add Row";
+            this.addRowToolStripMenuItem.Click += new System.EventHandler(this.addRowToolStripMenuItem_Click);
+            // 
+            // removeRowToolStripMenuItem
+            // 
+            this.removeRowToolStripMenuItem.Name = "removeRowToolStripMenuItem";
+            this.removeRowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.removeRowToolStripMenuItem.Text = "Remove Row";
+            this.removeRowToolStripMenuItem.Click += new System.EventHandler(this.removeRowToolStripMenuItem_Click);
             // 
             // idColumn
             // 
@@ -245,11 +274,18 @@
             // 
             this.subjectBindingSource.DataSource = typeof(subjectmanager.Subject);
             // 
+            // editRowButton
+            // 
+            this.editRowButton.Name = "editRowButton";
+            this.editRowButton.Size = new System.Drawing.Size(180, 22);
+            this.editRowButton.Text = "Edit Row";
+            this.editRowButton.Click += new System.EventHandler(this.editRowButton_Click);
+            // 
             // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1152, 576);
+            this.ClientSize = new System.Drawing.Size(1482, 721);
             this.Controls.Add(this.filterByDateButton);
             this.Controls.Add(this.endDatePicker);
             this.Controls.Add(this.startDatePicker);
@@ -258,6 +294,7 @@
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "DataForm";
             this.Text = "View Database";
             this.Load += new System.EventHandler(this.DataForm_Load);
@@ -296,6 +333,10 @@
         private System.Windows.Forms.DateTimePicker endDatePicker;
         private System.Windows.Forms.Button filterByDateButton;
         private System.Windows.Forms.ToolStripStatusLabel dateFilterActivityLabel;
+        private System.Windows.Forms.ToolStripMenuItem groupsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editRowButton;
     }
 }
