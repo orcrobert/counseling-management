@@ -12,6 +12,7 @@ namespace subjectmanager
         public String name { get; set; }
         public String classOf {  get; set; }
         public String motive { get; set; }
+        public String school { get; set; }
         public int noOfAppointments { get; set; }
     }
 }

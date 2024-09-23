@@ -35,6 +35,8 @@
             this.deleteSubjectButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.importButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // viewDataFormButton
@@ -72,7 +74,7 @@
             // 
             // addAppointmentButton
             // 
-            this.addAppointmentButton.Location = new System.Drawing.Point(236, 273);
+            this.addAppointmentButton.Location = new System.Drawing.Point(50, 290);
             this.addAppointmentButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addAppointmentButton.Name = "addAppointmentButton";
             this.addAppointmentButton.Size = new System.Drawing.Size(276, 54);
@@ -110,11 +112,35 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Edit Database";
             // 
+            // importButton
+            // 
+            this.importButton.Location = new System.Drawing.Point(414, 290);
+            this.importButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(276, 54);
+            this.importButton.TabIndex = 8;
+            this.importButton.Text = "Import From Excel";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(236, 476);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(276, 54);
+            this.deleteButton.TabIndex = 9;
+            this.deleteButton.Text = "Delete from Matricole";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 404);
+            this.ClientSize = new System.Drawing.Size(744, 581);
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.importButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteSubjectButton);
@@ -141,5 +167,7 @@
         private System.Windows.Forms.Button deleteSubjectButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button importButton;
+        private System.Windows.Forms.Button deleteButton;
     }
 }

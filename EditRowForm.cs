@@ -21,11 +21,14 @@ namespace subjectmanager
         {
             this.currentTable = currentTable;
             this.rowID = Int32.Parse(row.CurrentRow.Cells[0].Value.ToString());
+            
             InitializeComponent();
+
             nameTextBox.Text = row.CurrentRow.Cells[1].Value.ToString();
             classTextBox.Text = row.CurrentRow.Cells[2].Value.ToString();
             motiveTextBox.Text = row.CurrentRow.Cells[3].Value.ToString();
-            noOfAppointmentsTextBox.Text = row.CurrentRow.Cells[4].Value.ToString();
+            schoolTextBox.Text = row.CurrentRow.Cells[4].Value.ToString();
+            noOfAppointmentsTextBox.Text = row.CurrentRow.Cells[5].Value.ToString();
 
             if (currentTable == "students")
                 changeToStudentLabels();
@@ -41,6 +44,8 @@ namespace subjectmanager
             label2.Text = "Class";
             label3.Text = "Motive";
             label4.Text = "Number of appointments";
+            label5.Visible = true;
+            schoolTextBox.Visible = true;
         }
 
         private void changeToAppointmentLables()
@@ -49,6 +54,8 @@ namespace subjectmanager
             label2.Text = "Date";
             label3.Text = "Theme";
             label4.Text = "Type";
+            label5.Visible = false;
+            schoolTextBox.Visible = false;
         }
 
         private void changeToParentTeacherLables()
@@ -57,6 +64,8 @@ namespace subjectmanager
             label2.Text = "Phone";
             label3.Text = "Email";
             label4.Text = "Number of appointments";
+            label5.Visible = false;
+            schoolTextBox.Visible = false;
         }
 
         private void EditRowForm_Load(object sender, EventArgs e)
@@ -72,12 +81,13 @@ namespace subjectmanager
 
             if (this.currentTable == "matricole")
             { 
-                query = "UPDATE matricole SET name = @name, classOf = @classOf, motive =  @motive, noOfAppointments = @noOfAppointments WHERE Id = @Id";
+                query = "UPDATE matricole SET name = @name, classOf = @classOf, motive =  @motive, school = @school, noOfAppointments = @noOfAppointments WHERE Id = @Id";
                 cmd = new SqlCommand(query, conn);
 
                 cmd.Parameters.AddWithValue("@name", nameTextBox.Text);
                 cmd.Parameters.AddWithValue("@classOf", classTextBox.Text);
                 cmd.Parameters.AddWithValue("@motive", motiveTextBox.Text);
+                cmd.Parameters.AddWithValue("@school", schoolTextBox.Text);
                 cmd.Parameters.AddWithValue("@noOfAppointments", Int32.Parse(noOfAppointmentsTextBox.Text));
                 cmd.Parameters.AddWithValue("@Id", rowID);
             }
