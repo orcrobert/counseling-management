@@ -51,12 +51,6 @@ namespace subjectmanager
             form.ShowDialog();
         }
 
-        private void deleteSubjectButton_Click(object sender, EventArgs e)
-        {
-            DeleteSubjectForm form = new DeleteSubjectForm();
-            form.ShowDialog();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             DataForm form = new DataForm();
@@ -158,6 +152,7 @@ namespace subjectmanager
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
 
                     MessageBox.Show("All data from the 'Matricole' table has been deleted.");
                 }
@@ -170,6 +165,11 @@ namespace subjectmanager
                     conn.Close();
                 }
             }
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

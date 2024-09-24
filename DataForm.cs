@@ -5,10 +5,14 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace subjectmanager
 {
@@ -59,6 +63,7 @@ namespace subjectmanager
 
         public void showDataStudents(string searchQuery = "")
         {
+            exportPDFToolStripMenuItem.Visible = false;
             conn.Open();
 
             string query = @"SELECT * FROM matricole";
@@ -90,6 +95,9 @@ namespace subjectmanager
 
         public void showDataAppointments(string searchQuery = "")
         {
+            dataGridView1.AutoGenerateColumns = true;
+            exportPDFToolStripMenuItem.Visible = true;
+
             showDatePickers();
             conn.Open();
 
@@ -121,6 +129,7 @@ namespace subjectmanager
 
         public void showDataParents(string searchQuery = "")
         {
+            exportPDFToolStripMenuItem.Visible = false;
             conn.Open();
 
             string query = @"SELECT * FROM parents";
@@ -152,6 +161,7 @@ namespace subjectmanager
 
         public void showDataTeachers(string searchQuery = "")
         {
+            exportPDFToolStripMenuItem.Visible = false;
             conn.Open();
 
             string query = @"SELECT * FROM teachers";
@@ -182,6 +192,7 @@ namespace subjectmanager
         }
         public void showDataGroups(string searchQuery = "")
         {
+            exportPDFToolStripMenuItem.Visible = false;
             conn.Open();
 
             string query = @"SELECT * FROM groupAppointments";
@@ -405,6 +416,112 @@ namespace subjectmanager
             conn.Close();
 
             MessageBox.Show("Record deleted successfully!");
+        }
+
+        private void reorderForExport()
+        {
+            dataGridView1.AutoGenerateColumns = false;
+
+            dataGridView1.Columns.Clear();
+
+            DataGridViewTextBoxColumn dateColumn = new DataGridViewTextBoxColumn();
+            dateColumn.HeaderText = "Date";
+            dateColumn.DataPropertyName = "date";
+            dateColumn.DisplayIndex = 0;
+            dataGridView1.Columns.Add(dateColumn);
+
+            DataGridViewTextBoxColumn typeColumn = new DataGridViewTextBoxColumn();
+            typeColumn.HeaderText = "Type";
+            typeColumn.DataPropertyName = "type";
+            typeColumn.DisplayIndex = 1;
+            dataGridView1.Columns.Add(typeColumn);
+
+            DataGridViewTextBoxColumn nameColumn = new DataGridViewTextBoxColumn();
+            nameColumn.HeaderText = "Name";
+            nameColumn.DataPropertyName = "name";
+            nameColumn.DisplayIndex = 2;
+            dataGridView1.Columns.Add(nameColumn);
+
+            DataGridViewTextBoxColumn themeColumn = new DataGridViewTextBoxColumn();
+            themeColumn.HeaderText = "Theme";
+            themeColumn.DataPropertyName = "theme";
+            themeColumn.DisplayIndex = 3;
+            dataGridView1.Columns.Add(themeColumn);
+        }
+
+        private void sortByDate()
+        {
+            DataTable table = (DataTable)dataGridView1.DataSource;
+            DataView dataView = table.DefaultView;
+            dataView.Sort = "date ASC";
+            dataGridView1.DataSource = dataView.ToTable();
+        }
+
+        private void exportPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            reorderForExport();
+            sortByDate();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            saveFileDialog.Title = "Save PDF File";
+            saveFileDialog.FileName = "AppointmentsTable.pdf";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                try
+                {
+                    Document doc = new Document(PageSize.A4);
+                    PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+
+                    doc.Open();
+
+                    string paragraphTitle = "";
+
+                    if (dateFilterActivityLabel.Text == "(inactive date filter)")
+                        paragraphTitle = "Appointments - All time";
+                    else
+                        paragraphTitle = "Appointments \n" + startDatePicker.Text + " - " + endDatePicker.Text;
+
+                    Paragraph title = new Paragraph(paragraphTitle);
+                    title.Alignment = Element.ALIGN_CENTER;
+                    doc.Add(title);
+
+                    doc.Add(new Paragraph(" "));
+
+                    PdfPTable pdfTable = new PdfPTable(dataGridView1.ColumnCount);
+
+                    foreach (DataGridViewColumn column in dataGridView1.Columns)
+                    {
+                        PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
+                        pdfTable.AddCell(cell);
+                    }
+
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            foreach (DataGridViewCell cell in row.Cells)
+                            {
+                                pdfTable.AddCell(cell.Value?.ToString() ?? string.Empty);
+                            }
+                        }
+                    }
+
+                    doc.Add(pdfTable);
+                    doc.Close();
+
+                    MessageBox.Show("PDF created successfully!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error while creating PDF: " + ex.Message);
+                }
+            }
+
+            showDataAppointments();
         }
     }
 }

@@ -38,23 +38,24 @@
             this.appointmentDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parentDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teacherDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editRowButton = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateFilterActivityLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.endDatePicker = new System.Windows.Forms.DateTimePicker();
             this.filterByDateButton = new System.Windows.Forms.Button();
-            this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.idColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.nameColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.classColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.motiveColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.appointmentsColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
             this.subjectBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.editRowButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -102,7 +103,8 @@
             this.parentDatabaseToolStripMenuItem,
             this.teacherDatabaseToolStripMenuItem,
             this.groupsToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.exportPDFToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1482, 27);
@@ -149,6 +151,44 @@
             this.teacherDatabaseToolStripMenuItem.Text = "Teachers";
             this.teacherDatabaseToolStripMenuItem.Click += new System.EventHandler(this.teacherDatabaseToolStripMenuItem_Click);
             // 
+            // groupsToolStripMenuItem
+            // 
+            this.groupsToolStripMenuItem.Name = "groupsToolStripMenuItem";
+            this.groupsToolStripMenuItem.Size = new System.Drawing.Size(57, 23);
+            this.groupsToolStripMenuItem.Text = "Groups";
+            this.groupsToolStripMenuItem.Click += new System.EventHandler(this.groupsToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addRowToolStripMenuItem,
+            this.removeRowToolStripMenuItem,
+            this.editRowButton});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 23);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // addRowToolStripMenuItem
+            // 
+            this.addRowToolStripMenuItem.Name = "addRowToolStripMenuItem";
+            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.addRowToolStripMenuItem.Text = "Add Row";
+            this.addRowToolStripMenuItem.Click += new System.EventHandler(this.addRowToolStripMenuItem_Click);
+            // 
+            // removeRowToolStripMenuItem
+            // 
+            this.removeRowToolStripMenuItem.Name = "removeRowToolStripMenuItem";
+            this.removeRowToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.removeRowToolStripMenuItem.Text = "Remove Row";
+            this.removeRowToolStripMenuItem.Click += new System.EventHandler(this.removeRowToolStripMenuItem_Click);
+            // 
+            // editRowButton
+            // 
+            this.editRowButton.Name = "editRowButton";
+            this.editRowButton.Size = new System.Drawing.Size(143, 22);
+            this.editRowButton.Text = "Edit Row";
+            this.editRowButton.Click += new System.EventHandler(this.editRowButton_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -180,7 +220,7 @@
             this.startDatePicker.Name = "startDatePicker";
             this.startDatePicker.Size = new System.Drawing.Size(200, 20);
             this.startDatePicker.TabIndex = 4;
-            this.startDatePicker.Value = new System.DateTime(2024, 9, 20, 15, 38, 0, 0);
+            this.startDatePicker.Value = new System.DateTime(2024, 9, 24, 0, 0, 0, 0);
             // 
             // endDatePicker
             // 
@@ -198,37 +238,6 @@
             this.filterByDateButton.Text = "Filter";
             this.filterByDateButton.UseVisualStyleBackColor = true;
             this.filterByDateButton.Click += new System.EventHandler(this.filterByDateButton_Click);
-            // 
-            // groupsToolStripMenuItem
-            // 
-            this.groupsToolStripMenuItem.Name = "groupsToolStripMenuItem";
-            this.groupsToolStripMenuItem.Size = new System.Drawing.Size(57, 23);
-            this.groupsToolStripMenuItem.Text = "Groups";
-            this.groupsToolStripMenuItem.Click += new System.EventHandler(this.groupsToolStripMenuItem_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addRowToolStripMenuItem,
-            this.removeRowToolStripMenuItem,
-            this.editRowButton});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 23);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // addRowToolStripMenuItem
-            // 
-            this.addRowToolStripMenuItem.Name = "addRowToolStripMenuItem";
-            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addRowToolStripMenuItem.Text = "Add Row";
-            this.addRowToolStripMenuItem.Click += new System.EventHandler(this.addRowToolStripMenuItem_Click);
-            // 
-            // removeRowToolStripMenuItem
-            // 
-            this.removeRowToolStripMenuItem.Name = "removeRowToolStripMenuItem";
-            this.removeRowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.removeRowToolStripMenuItem.Text = "Remove Row";
-            this.removeRowToolStripMenuItem.Click += new System.EventHandler(this.removeRowToolStripMenuItem_Click);
             // 
             // idColumn
             // 
@@ -274,12 +283,12 @@
             // 
             this.subjectBindingSource.DataSource = typeof(subjectmanager.Subject);
             // 
-            // editRowButton
+            // exportPDFToolStripMenuItem
             // 
-            this.editRowButton.Name = "editRowButton";
-            this.editRowButton.Size = new System.Drawing.Size(180, 22);
-            this.editRowButton.Text = "Edit Row";
-            this.editRowButton.Click += new System.EventHandler(this.editRowButton_Click);
+            this.exportPDFToolStripMenuItem.Name = "exportPDFToolStripMenuItem";
+            this.exportPDFToolStripMenuItem.Size = new System.Drawing.Size(77, 23);
+            this.exportPDFToolStripMenuItem.Text = "Export PDF";
+            this.exportPDFToolStripMenuItem.Click += new System.EventHandler(this.exportPDFToolStripMenuItem_Click);
             // 
             // DataForm
             // 
@@ -338,5 +347,6 @@
         private System.Windows.Forms.ToolStripMenuItem addRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editRowButton;
+        private System.Windows.Forms.ToolStripMenuItem exportPDFToolStripMenuItem;
     }
 }

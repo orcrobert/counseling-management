@@ -220,7 +220,7 @@
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AddSubjectForm";
-            this.Text = "AddSubjectForm";
+            this.Text = "Add Entity";
             this.Load += new System.EventHandler(this.AddSubjectForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -42,6 +42,8 @@ namespace subjectmanager
 
         private void LoadStudents()
         {
+            this.subjectsComboBox.Visible = true;
+            this.textBox1.Visible = false;
             try
             {
                 conn.Open();
@@ -66,6 +68,8 @@ namespace subjectmanager
 
         private void LoadParents()
         {
+            this.subjectsComboBox.Visible = true;
+            this.textBox1.Visible = false;
             try
             {
                 conn.Open();
@@ -90,6 +94,8 @@ namespace subjectmanager
 
         private void LoadTeachers()
         {
+            this.subjectsComboBox.Visible = true;
+            this.textBox1.Visible = false;
             try
             {
                 conn.Open();
@@ -112,6 +118,38 @@ namespace subjectmanager
             }
         }
 
+        private void LoadGroups()
+        {
+            this.subjectsComboBox.Visible = true;
+            this.textBox1.Visible = false;
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Id, name FROM groupAppointments", conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable subjectsTable = new DataTable();
+                adapter.Fill(subjectsTable);
+
+                subjectsComboBox.DataSource = subjectsTable;
+                subjectsComboBox.DisplayMember = "name";
+                subjectsComboBox.ValueMember = "name";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading groups: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void LoadOther()
+        {
+            this.subjectsComboBox.Visible = false;
+            this.textBox1.Visible = true;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             DataRowView selectedRow = (DataRowView)subjectsComboBox.SelectedItem;
@@ -128,18 +166,34 @@ namespace subjectmanager
                     cmd = new SqlCommand("UPDATE parents SET noOfAppointments = noOfAppointments + 1 WHERE name = @SubjectName", conn);
                 else if (entity == "teacher")
                     cmd = new SqlCommand("UPDATE teachers SET noOfAppointments = noOfAppointments + 1 WHERE name = @SubjectName", conn);
+                else if (entity == "group")
+                    cmd = new SqlCommand("UPDATE groupAppointments SET noOfAppointments = noOfAppointments +1 WHERE name = @SubjectName", conn);
 
-                cmd.Parameters.AddWithValue("@SubjectName", subjectName);
+                int rowsAffected;
 
-                int rowsAffected = cmd.ExecuteNonQuery();
+                if (entity != "other")
+                {
+                    cmd.Parameters.AddWithValue("@SubjectName", subjectName);
 
-                if (rowsAffected > 0)
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
+                else
+                {
+                    rowsAffected = 1;
+                }
+
+                if (rowsAffected > 0 || entity == "other")
                 {
                     DateTime selectedDate = dateTimePicker1.Value;
                     string theme = themeTextBox.Text;
 
                     cmd = new SqlCommand("INSERT INTO appointmentsDate (name, date, theme, type) VALUES (@name, @date, @theme, @type)", conn);
-                    cmd.Parameters.AddWithValue("@name", subjectName);
+                    
+                    if (entity == "other")
+                        cmd.Parameters.AddWithValue("@name", textBox1.Text);
+                    else
+                        cmd.Parameters.AddWithValue("@name", subjectName);
+
                     cmd.Parameters.AddWithValue("@date", selectedDate);
                     cmd.Parameters.AddWithValue("@theme", theme);
 
@@ -149,6 +203,10 @@ namespace subjectmanager
                         cmd.Parameters.AddWithValue("@type", "parent");
                     else if (entity == "teacher")
                         cmd.Parameters.AddWithValue("@type", "teacher");
+                    else if (entity == "group")
+                        cmd.Parameters.AddWithValue("@type", "group");
+                    else if (entity == "other")
+                        cmd.Parameters.AddWithValue("@type", "other");
 
                     cmd.ExecuteNonQuery();
 
@@ -167,44 +225,6 @@ namespace subjectmanager
             {
                 conn.Close();
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                conn.Open();
-
-                int appointmentCount;
-                if (textBox2.Text.Length == 0)
-                    appointmentCount = 1;
-                else
-                {
-                    try
-                    {
-                        appointmentCount = int.Parse(textBox2.Text);
-                    }
-                    catch (FormatException ex)
-                    {
-                        MessageBox.Show("Number of appointments must be a integer!");
-                        return;
-                    }
-                }
-
-                SqlCommand cmd = new SqlCommand("UPDATE groupAppointments SET noOfAppointments = noOfAppointments + @appointmentCount", conn);
-                cmd.Parameters.AddWithValue("@appointmentCount", appointmentCount);
-                int rowsAffected = cmd.ExecuteNonQuery();
-
-                if (rowsAffected > 0)
-                    MessageBox.Show("Appointment added successfully!");
-                else
-                    MessageBox.Show("Failed to add appointment!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error updating number of group appointments!");
-            }
-            finally { conn.Close(); }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -309,6 +329,18 @@ namespace subjectmanager
         {
             entity = "teacher";
             LoadTeachers();
+        }
+
+        private void groupRadio_Click(object sender, EventArgs e)
+        {
+            entity = "group";
+            LoadGroups();
+        }
+
+        private void otherRadio_Click(object sender, EventArgs e)
+        {
+            entity = "other";
+            LoadOther();
         }
 
         private void themeTextBox_Enter(object sender, EventArgs e)
