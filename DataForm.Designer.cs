@@ -32,6 +32,12 @@
             this.subjectsDataSet = new subjectmanager.SubjectsDataSet();
             this.subjectsDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.idColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.nameColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.classColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.motiveColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.appointmentsColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
+            this.subjectBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.subjectDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,25 +49,19 @@
             this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editRowButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.dateFilterActivityLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.endDatePicker = new System.Windows.Forms.DateTimePicker();
             this.filterByDateButton = new System.Windows.Forms.Button();
-            this.idColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.nameColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.classColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.motiveColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.appointmentsColumn = new DataGridViewAutoFilter.DataGridViewAutoFilterTextBoxColumn();
-            this.subjectBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.exportPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.subjectBindingSource)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.subjectBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // subjectsDataSet
@@ -94,8 +94,53 @@
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
+            // idColumn
+            // 
+            this.idColumn.DataPropertyName = "ID";
+            this.idColumn.FilteringEnabled = false;
+            this.idColumn.HeaderText = "ID";
+            this.idColumn.Name = "idColumn";
+            this.idColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.DataPropertyName = "name";
+            this.nameColumn.FilteringEnabled = false;
+            this.nameColumn.HeaderText = "name";
+            this.nameColumn.Name = "nameColumn";
+            this.nameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // classColumn
+            // 
+            this.classColumn.DataPropertyName = "classOf";
+            this.classColumn.FilteringEnabled = false;
+            this.classColumn.HeaderText = "classOf";
+            this.classColumn.Name = "classColumn";
+            this.classColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // motiveColumn
+            // 
+            this.motiveColumn.DataPropertyName = "motive";
+            this.motiveColumn.FilteringEnabled = false;
+            this.motiveColumn.HeaderText = "motive";
+            this.motiveColumn.Name = "motiveColumn";
+            this.motiveColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // appointmentsColumn
+            // 
+            this.appointmentsColumn.DataPropertyName = "noOfAppointments";
+            this.appointmentsColumn.FilteringEnabled = false;
+            this.appointmentsColumn.HeaderText = "noOfAppointments";
+            this.appointmentsColumn.Name = "appointmentsColumn";
+            this.appointmentsColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // subjectBindingSource
+            // 
+            this.subjectBindingSource.DataSource = typeof(subjectmanager.Subject);
+            // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1,
             this.subjectDatabaseToolStripMenuItem,
@@ -189,8 +234,16 @@
             this.editRowButton.Text = "Edit Row";
             this.editRowButton.Click += new System.EventHandler(this.editRowButton_Click);
             // 
+            // exportPDFToolStripMenuItem
+            // 
+            this.exportPDFToolStripMenuItem.Name = "exportPDFToolStripMenuItem";
+            this.exportPDFToolStripMenuItem.Size = new System.Drawing.Size(77, 23);
+            this.exportPDFToolStripMenuItem.Text = "Export PDF";
+            this.exportPDFToolStripMenuItem.Click += new System.EventHandler(this.exportPDFToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.dateFilterActivityLabel});
@@ -216,7 +269,7 @@
             // 
             // startDatePicker
             // 
-            this.startDatePicker.Location = new System.Drawing.Point(984, 1);
+            this.startDatePicker.Location = new System.Drawing.Point(887, 1);
             this.startDatePicker.Name = "startDatePicker";
             this.startDatePicker.Size = new System.Drawing.Size(200, 20);
             this.startDatePicker.TabIndex = 4;
@@ -224,71 +277,20 @@
             // 
             // endDatePicker
             // 
-            this.endDatePicker.Location = new System.Drawing.Point(1190, 1);
+            this.endDatePicker.Location = new System.Drawing.Point(1093, 1);
             this.endDatePicker.Name = "endDatePicker";
             this.endDatePicker.Size = new System.Drawing.Size(200, 20);
             this.endDatePicker.TabIndex = 5;
             // 
             // filterByDateButton
             // 
-            this.filterByDateButton.Location = new System.Drawing.Point(1395, 0);
+            this.filterByDateButton.Location = new System.Drawing.Point(1299, 1);
             this.filterByDateButton.Name = "filterByDateButton";
             this.filterByDateButton.Size = new System.Drawing.Size(75, 23);
             this.filterByDateButton.TabIndex = 6;
             this.filterByDateButton.Text = "Filter";
             this.filterByDateButton.UseVisualStyleBackColor = true;
             this.filterByDateButton.Click += new System.EventHandler(this.filterByDateButton_Click);
-            // 
-            // idColumn
-            // 
-            this.idColumn.DataPropertyName = "ID";
-            this.idColumn.FilteringEnabled = false;
-            this.idColumn.HeaderText = "ID";
-            this.idColumn.Name = "idColumn";
-            this.idColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.DataPropertyName = "name";
-            this.nameColumn.FilteringEnabled = false;
-            this.nameColumn.HeaderText = "name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // classColumn
-            // 
-            this.classColumn.DataPropertyName = "classOf";
-            this.classColumn.FilteringEnabled = false;
-            this.classColumn.HeaderText = "classOf";
-            this.classColumn.Name = "classColumn";
-            this.classColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // motiveColumn
-            // 
-            this.motiveColumn.DataPropertyName = "motive";
-            this.motiveColumn.FilteringEnabled = false;
-            this.motiveColumn.HeaderText = "motive";
-            this.motiveColumn.Name = "motiveColumn";
-            this.motiveColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // appointmentsColumn
-            // 
-            this.appointmentsColumn.DataPropertyName = "noOfAppointments";
-            this.appointmentsColumn.FilteringEnabled = false;
-            this.appointmentsColumn.HeaderText = "noOfAppointments";
-            this.appointmentsColumn.Name = "appointmentsColumn";
-            this.appointmentsColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // subjectBindingSource
-            // 
-            this.subjectBindingSource.DataSource = typeof(subjectmanager.Subject);
-            // 
-            // exportPDFToolStripMenuItem
-            // 
-            this.exportPDFToolStripMenuItem.Name = "exportPDFToolStripMenuItem";
-            this.exportPDFToolStripMenuItem.Size = new System.Drawing.Size(77, 23);
-            this.exportPDFToolStripMenuItem.Text = "Export PDF";
-            this.exportPDFToolStripMenuItem.Click += new System.EventHandler(this.exportPDFToolStripMenuItem_Click);
             // 
             // DataForm
             // 
@@ -310,11 +312,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.subjectBindingSource)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.subjectBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
